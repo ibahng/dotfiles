@@ -3,8 +3,11 @@ gui:
   showFileTrue: true
   tabWidth: 2
   sidePanelWidth: 0.2
-  scrollPastBottom: true
+  scrollPastBottom: false
+  scrollOffMargin: 4
+  expandFocusedSidePanel: true
   wrapLinesInStagingView: true
+  commandLogSize: 15
   theme:
     activeBorderColor:
       - '#ffa500'
