@@ -1,0 +1,15 @@
+gui:
+  nerdFontsVersion: "3"
+  showFileTrue: true
+  tabWidth: 2
+  sidePanelWidth: 0.2
+  scrollPastBottom: true
+  wrapLinesInStagingView: true
+  theme:
+    activeBorderColor:
+      - '#ffa500'
+      - bold
+  
+git:
+  diffContextSize: 5
+
