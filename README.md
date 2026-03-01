@@ -35,7 +35,7 @@ ln -s ~/dotfiles/zshrc/.zshrc ~/.zshrc
 ```
 
 ```zsh
-# zshrc
+# hammerspoon
 ln -s ~/dotfiles/hammerspoon/.hammerspoon ~/.hammerspoon
 ```
 
