@@ -34,6 +34,11 @@ ln -s ~/dotfiles/skhd ~/.config/skhd
 ln -s ~/dotfiles/zshrc/.zshrc ~/.zshrc
 ```
 
+```zsh
+# zshrc
+ln -s ~/dotfiles/hammerspoon/.hammerspoon ~/.hammerspoon
+```
+
 Feburary 28, 2026 -- There have been some issues regarding yabai-v7.1.17 set up (specifically workspace navigation commands) on macOS Taheo 26.3. The issue was resolved when yabai was downgraded to yabai-v7.1.16.
 
 ```zsh
