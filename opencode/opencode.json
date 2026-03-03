@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "google/big-pickle",
+  "plugin": ["opencode-gemini-auth@latest", "@mohak34/opencode-notifier@latest" ]
+}
