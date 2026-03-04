@@ -12,6 +12,20 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
+    vim.lsp.config("texlab", {
+      capabilities = capabilities,
+      settings = {
+        texlab = {
+          diagnostics = {
+            ignoredPatterns = {
+              "Unused label",
+              "Undefined reference",
+            },
+          },
+        },
+      },
+    })
+
     vim.lsp.config("*", {
       capabilities = capabilities,
     })
