@@ -26,7 +26,7 @@ return {
     }
 
     --  vim.keymap.set("n", "<leader>lv", "<leader>lv") -- forward search 
-    vim.g['vimtex_fold_enabled'] = 0
+    vim.g['vimtex_fold_enabled'] = 1
     vim.g['vimtex_fold_levelmarker'] = '>'
     vim.g['vimtex_indent_enabled'] = 1
     vim.g.vimtex_fold_types = {

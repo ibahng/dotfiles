@@ -12,6 +12,9 @@ keymap("n", "j", "gj", opts)
 keymap("n", "<c-d>", "<c-d>zz", opts)           -- centers the cursor while moving vertically in a buffer using ctrl d and ctrl u 
 keymap("n", "<c-u>", "<c-u>zz", opts)
 keymap("n", "<leader>w", ":set wrap!<cr>", opts)              -- toggles text wraping
+keymap("n", "zO", "zR", opts)              -- open all folds
+keymap("n", "zC", "zM", opts)              -- close all folds
+
 
 -- BUFFER NAVIGATION ==============================================================================
 keymap("n", "<leader>e", "<cmd>Neotree toggle<cr>", { noremap = true, silent = true, desc = 'Neotree Toggle' })         -- neotree toggle
