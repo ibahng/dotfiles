@@ -16,6 +16,7 @@ vim.opt.expandtab = true                        -- convert tabs to spaces
 vim.opt.termguicolors = true                    -- set term gui colors (most terminals support this)
 vim.opt.softtabstop = 2
 vim.opt.background = "dark"                     -- Force dark mode
+vim.opt.breakindent = true                      -- wrapped lines maintain same indent as first line
 
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#8e93a5' })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#8e93a5' })

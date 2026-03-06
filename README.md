@@ -2,7 +2,7 @@
 
 All of my configuration files.
 
-Here are the symlinks for each config file or directory.
+Here are the symlinks and additional commands for each config file or directory.
 
 ```zsh
 # kitty
@@ -32,6 +32,15 @@ ln -s ~/dotfiles/skhd ~/.config/skhd
 ```zsh
 # zshrc
 ln -s ~/dotfiles/zshrc/.zshrc ~/.zshrc
+```
+
+```zsh
+# scripts
+ln -s ~/dotfiles/scripts ~/bin/scripts
+
+chmod +x ~/bin/scripts/dotfiles
+chmod +x ~/bin/scripts/ibahng
+chmod +x ~/bin/scripts/reports
 ```
 
 ```zsh
