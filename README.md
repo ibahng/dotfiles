@@ -41,6 +41,9 @@ ln -s ~/dotfiles/scripts ~/bin/scripts
 chmod +x ~/bin/scripts/dotfiles
 chmod +x ~/bin/scripts/ibahng
 chmod +x ~/bin/scripts/reports
+chmod +x ~/bin/scripts/career
+chmod +x ~/bin/scripts/research
+chmod +x ~/bin/scripts/sandbox
 ```
 
 ```zsh
