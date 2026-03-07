@@ -10,7 +10,6 @@ return {
 
     require("telescope").setup {
       defaults = {
-
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
@@ -87,8 +86,6 @@ return {
         find_files = {
           hidden = true
         }
-      },
-      extensions = {
       },
     }
   end,
