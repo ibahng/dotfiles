@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ~/Workspaces/career
+nvim .
+
