@@ -214,6 +214,8 @@ return {
           '%1.fdb_latexmk',
           '%1.bbl',
           '%1.blg',
+          '%1.bcf',
+          '%1.run.xml',
         },
       },
     },
@@ -243,9 +245,11 @@ return {
           "*.fdb_latexmk",
           "*.bbl",
           "*.blg",
+          '*.bcf',
+          '*.run.xml',
         },
         always_show = { -- remains visible even if other settings would normally hide it
-          --".gitignored",
+          ".gitignored",
         },
         always_show_by_pattern = { -- uses glob style patterns
           --".env*",

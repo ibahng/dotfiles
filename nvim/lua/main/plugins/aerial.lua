@@ -104,6 +104,11 @@ return {
       "Class",
       "Function",
       "Method",
+      "Module",
+      "Variable",
+      "Constant",
+      "Dictionary",
+      "Array",
     },
 
     -- Determines line highlighting mode when multiple splits are visible.

@@ -29,6 +29,11 @@ return {
     vim.g['vimtex_fold_enabled'] = 1
     vim.g['vimtex_fold_levelmarker'] = '>'
     vim.g['vimtex_indent_enabled'] = 1
+
+    vim.g.vimtex_quickfix_ignore_filters = {
+      "Overfull",
+      "Underfull",
+    }
     vim.g.vimtex_fold_types = {
       preamble = { enabled = 1 }, -- enable folding of preamble
       items = {enabled = 0},
