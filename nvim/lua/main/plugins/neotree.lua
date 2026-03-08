@@ -216,6 +216,7 @@ return {
           '%1.blg',
           '%1.bcf',
           '%1.run.xml',
+          '%1.synctex(busy)',
         },
       },
     },
@@ -247,6 +248,8 @@ return {
           "*.blg",
           '*.bcf',
           '*.run.xml',
+          '*.synctex(busy)',
+
         },
         always_show = { -- remains visible even if other settings would normally hide it
           ".gitignored",
