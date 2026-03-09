@@ -85,6 +85,17 @@ return {
         { i(1) }
       )),
 
+      s('cf', fmta(
+        [[
+        \chemfig{
+          [:0]
+          -[:30]
+        }
+        ]],
+        { }
+      )),
+
+
     })
 
     ls.add_snippets('py', {
