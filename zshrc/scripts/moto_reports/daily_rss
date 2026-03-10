@@ -2,5 +2,5 @@
 source /opt/anaconda3/etc/profile.d/conda.sh
 conda activate fdata
 cd ~/Workspaces/reports/scripts
-python daily_bond.py
+python rss.py
 
