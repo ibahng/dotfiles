@@ -21,7 +21,7 @@ if [ -f '/Users/ingyubahng/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ingy
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="$HOME/bin/scripts:$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin/scripts/workspaces:$HOME/bin/scripts/moto_reports:$HOME/.local/bin:$PATH"
 
 # ALIASES =========================================================================================
 alias oc='opencode'

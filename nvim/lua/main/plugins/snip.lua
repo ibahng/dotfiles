@@ -104,7 +104,12 @@ return {
     })
 
     ls.add_snippets('py', {
-      -- s()
+
+      s('ignore', fmta(
+        '# type: ignore',
+        { }
+      )),
+
     })
   end,
 }
