@@ -65,6 +65,11 @@ return {
         { i(1) }
       )),
 
+      s('tc', fmta(
+        '\\textcolor{<>}{}',
+        { i(1) }
+      )),
+
       s('tt', fmta(
         '\\texttt{<>}',
         { i(1) }
