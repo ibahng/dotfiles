@@ -100,6 +100,10 @@ return {
         { }
       )),
 
+      s('celsius', fmta(
+        '$^\\circ$C',
+        { i(1) }
+      )),
 
     })
 
