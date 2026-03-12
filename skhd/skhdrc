@@ -49,7 +49,7 @@ ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
 
 # RESIZING WINDOW =================================================================================
-ctrl + cmd - h : yabai -m window --resize right:-20:0 || yabai -m window --resize left:-20:0
-ctrl + cmd - l : yabai -m window --resize right:20:0 || yabai -m window --resize left:20:0
-ctrl + cmd - left : yabai -m window --resize right:-20:0 || yabai -m window --resize left:-20:0
-ctrl + cmd - right : yabai -m window --resize right:20:0 || yabai -m window --resize left:20:0
+ctrl + cmd - h : yabai -m window --resize right:-50:0 || yabai -m window --resize left:-50:0
+ctrl + cmd - l : yabai -m window --resize right:50:0 || yabai -m window --resize left:50:0
+ctrl + cmd - left : yabai -m window --resize right:-50:0 || yabai -m window --resize left:-50:0
+ctrl + cmd - right : yabai -m window --resize right:50:0 || yabai -m window --resize left:50:0
