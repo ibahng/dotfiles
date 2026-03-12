@@ -4,7 +4,7 @@ return {
   config = function()
     require('nvim_comment').setup({
       marker_padding = true,
-      comment_empty = true,
+      comment_empty = false,
       line_mapping = nil,
       operator_mapping = "co",
       comment_chunk_text_object = "ic"

@@ -52,7 +52,7 @@ return {
       )),
 
       s('proton', t(
-        '\\ce{H^+}'
+        '\\ce{H+}'
       )),
 
       s('tb', fmta(
