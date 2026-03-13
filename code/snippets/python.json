@@ -1,0 +1,134 @@
+{
+  // Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  //      "prefix": "log",
+  //      "body": [
+  //              "console.log('$1');",
+  //              "$2"
+  //      ],
+  //      "description": "Log output to console"
+  // }
+  "outline": {
+    "prefix": "outline",
+    "body": [
+      "code"
+    ],
+    "description": "outline for future snippets"
+  },
+  "finance data imports": {
+    "prefix": "fdata imports",
+    "body": [
+      "import numpy as np",
+      "import pandas as pd",
+      "import matplotlib.pyplot as plt",
+      "import yfinance as yf",
+      "import statsmodels.api as sm",
+      "import IPython.display as display"
+    ],
+    "description": "basic imports for yfinance api usage"
+  },
+  "ticker full history calling + simple returns": {
+    "prefix": "ticker",
+    "body": [
+      "$1_ticker = yf.Ticker('$2')",
+      "$1_history = $1_ticker.history(${3|period='max',start='2000-01-01'|})",
+      "$1_history['Simple Return'] = ($1_history['Close'] / $1_history['Close'].shift(1))-1",
+      "$1_history['Log Return'] = np.log($1_history['Close'] / $1_history['Close'].shift(1))",
+      "display.display($1_history) #----------TICKER HISTORY OUTPUT"
+    ],
+    "description": "calling the history and calculating simple returns"
+  },
+  "multiple ticker full history calling + simple returns": {
+    "prefix": "tickers",
+    "body": [
+      "tickers = [$1]",
+      "close_prices  = pd.DataFrame()",
+      "",
+      "for t in tickers:",
+      "  close_prices[t] = yf.Ticker(t).history(start='${2:2000-01-01}')['Close']",
+      "display.display(close_prices) #------------CLOSE PRICE HISTORY OUTPUT",
+      "",
+      "simple_returns = (close_prices / close_prices.shift(1)) - 1",
+      "display.display(simple_returns) #----------SIMPLE RETURNS HISTORY OUTPUT",
+      "",
+      "log_returns = np.log(close_prices / close_prices.shift(1))",
+      "display.display(log_returns) #----------LOG RETURNS HISTORY OUTPUT",
+      "$3"
+    ],
+    "description": ""
+  },
+  "stock price graph generation": {
+    "prefix": "ticker graph",
+    "body": [
+      "($1/c$1.iloc[0]*100).plot(figsize=(7.5,3))",
+      "plt.show()",
+      "$2"
+    ],
+    "description": "reating graphs with the start point standardized at 100"
+  },
+  "display": {
+    "prefix": "ds",
+    "body": [
+      "display.display(${TM_SELECTED_TEXT})"
+    ],
+    "description": "IPython display"
+  },
+  "print": {
+    "prefix": "p",
+    "body": [
+      "print(${TM_SELECTED_TEXT})"
+    ],
+    "description": "simple print"
+  },
+  "round to 4": {
+    "prefix": "r4",
+    "body": [
+      "round(${TM_SELECTED_TEXT}, 4)"
+    ],
+    "description": "round to 4 decimal places"
+  },
+  "json structure overview": {
+    "prefix": "overview",
+    "body": [
+      "for k,v in ${TM_SELECTED_TEXT}.items():",
+      "  print(k)",
+      "  print(v)",
+      "  print()"
+    ],
+    "description": "simple print"
+  },
+  "raw": {
+    "prefix": "raw",
+    "body": [
+      "#RAW DATA/OBSERVATION--------------------------------------------------------------",
+      "",
+      "#----------------------------------------------------------------------------------"
+    ],
+    "description": "raw data"
+  },
+  "strftime": {
+    "prefix": "strftime",
+    "body": [
+      "${TM_SELECTED_TEXT}.strftime('%Y-%m-%d')"
+    ],
+    "description": "datetiem to YYYY-MM-DD str format"
+  },
+  "2d": {
+    "prefix": "2d",
+    "body": [
+      "f'{${TM_SELECTED_TEXT}:.2f}'"
+    ],
+    "description": "float to two decimal string"
+  },
+  "ignore": {
+    "prefix": "ignore",
+    "body": [
+      "# type: ignore"
+    ],
+    "description": "float to two decimal string"
+  }
+}

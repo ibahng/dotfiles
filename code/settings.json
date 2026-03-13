@@ -1,0 +1,294 @@
+{
+    "window.zoomLevel": 1.8,
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Cobalt2",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 10,
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 180,
+    "editor.cursorWidth": 3,
+    "workbench.preferredDarkColorTheme": "Cobalt2",
+    "editor.cursorBlinking": "expand",
+    "better-comments.tags": [
+
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        }
+    ],
+    "notebook.output.fontFamily": "Menlo",
+    "editor.fontFamily": "Menlo",
+    "workbench.sash.size": 2,
+    "search.showLineNumbers": true,
+    "terminal.integrated.inheritEnv": false,
+    "notebook.output.wordWrap": true,
+    "notebook.output.scrolling": true,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "right"
+    },
+    "notebook.scrolling.revealNextCellOnExecute": "none",
+    "jupyter.askForKernelRestart": false,
+    "makefile.configureOnOpen": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "explorer.confirmDelete": false,
+    "python.createEnvironment.trigger": "off",
+    "workbench.editor.empty.hint": "hidden",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "codeium.enableCodeLens": false,
+    "window.commandCenter": false,
+    "latex-workshop.latex.tools": [
+        
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-xelatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "Rscript",
+            "args": [
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2tex",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2texminted",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2tex",
+            "command": "pweave",
+            "args": [
+                "-f",
+                "tex",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2texminted",
+            "command": "pweave",
+            "args": [
+                "-f",
+                "texminted",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tectonic",
+            "command": "tectonic",
+            "args": [
+                "--synctex",
+                "--keep-logs",
+                "--print",
+                "%DOC%.tex"
+            ],
+            "env": {}
+        }
+    ],
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["c", "o"],
+            "commands": ["editor.action.commentLine"]
+        },
+        {
+            "before": ["q"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["J"],
+            "commands": ["editor.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.moveLinesUpAction"]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+      }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": ["<leader>", "e"],
+        "commands": ["workbench.action.toggleSidebarVisibility"]
+      },
+      {
+          "before": ["H"],
+          "commands": ["workbench.action.previousEditor"]
+      },
+      {
+          "before": ["L"],
+          "commands": ["workbench.action.nextEditor"]
+      },
+      {
+          "before": ["<leader>", "b", "q"],
+          "commands": ["workbench.action.closeActiveEditor"]
+      },
+      {
+          "before": ["<C-h>"],
+          "commands": ["workbench.action.focusLeftGroup"]
+      },
+      {
+          "before": ["<C-l>"],
+          "commands": ["workbench.action.focusRightGroup"]
+      },
+      {
+          "before": ["<C-j>"],
+          "commands": ["workbench.action.focusBelowGroup"]
+      },
+      {
+          "before": ["<C-k>"],
+          "commands": ["workbench.action.focusAboveGroup"]
+      },
+      {
+          "before": ["<leader>", "w"],
+          "commands": ["editor.action.toggleWordWrap"]
+      },
+      {
+          "before": ["j"],
+          "after": ["g", "j"]
+      },
+      {
+          "before": ["k"],
+          "after": ["g", "k"]
+      }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+      "<C-a>": false,
+      "<C-f>": false
+    },
+    "extensions.experimental.affinity": {
+      "vscodevim.vim": 1
+    }
+  }
+}

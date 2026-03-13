@@ -21,3 +21,4 @@ vim.opt.breakindent = true                      -- wrapped lines maintain same i
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#8e93a5' })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#8e93a5' })
 
+vim.g.vimtex_view_skim_activate = 0
