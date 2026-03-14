@@ -1,4 +1,0 @@
-#!/bin/bash
-cd ~/Workspaces/reports
-code .
-

@@ -21,12 +21,26 @@ if [ -f '/Users/ingyubahng/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ingy
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="$HOME/bin/scripts/utils:$HOME/bin/scripts/workspaces:$HOME/bin/scripts/moto_reports:$HOME/.local/bin:$PATH"
+export PATH="\
+$HOME/bin/scripts/utils:\
+$HOME/bin/scripts/moto_reports:\
+$HOME/.local/bin:\
+$PATH"
 
 # ALIASES =========================================================================================
 alias oc='opencode'
 alias lg='lazygit'
 alias ca='conda activate'
+alias career='nvim ~/Workspaces/career'
+alias notepad='nvim ~/Workspaces/notepad.txt'
+alias models='nvim ~/Workspaces/models'
+alias reports='nvim ~/Workspaces/reports'
+alias sandbox='nvim ~/Workspaces/sandbox'
+alias research='nvim ~/Research'
+alias vsreports='code ~/Workspaces/reports'
+alias ibahng='nvim ~/ibahng-com'
+alias dotfiles='nvim ~/dotfiles'
+alias rankdisk='sudo du -sh ./* | sort -rh'
 
 # set history 
 HISTFILE=~/.zsh_history
@@ -138,3 +152,5 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 # source /usr/share/nvm/init-nvm.sh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/ingyubahng/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/dotfiles/zshrc/.zshrc_secrets ] && source ~/dotfiles/zshrc/.zshrc_secrets

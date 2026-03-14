@@ -1,5 +1,0 @@
-#!/bin/bash
-cd ~/Workspaces
-nvim notepad.txt
-
-
