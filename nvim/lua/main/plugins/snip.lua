@@ -105,6 +105,15 @@ return {
         { }
       )),
 
+      s('core', fmta(
+        [[
+        \begin{core}{<>}
+        
+        \end{core}
+        ]],
+        { i(1) }
+      )),
+
     })
 
     ls.add_snippets('python', {

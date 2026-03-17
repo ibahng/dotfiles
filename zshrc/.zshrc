@@ -153,4 +153,4 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/ingyubahng/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-[ -f ~/dotfiles/zshrc/.zshrc_secrets ] && source ~/dotfiles/zshrc/.zshrc_secrets
+[ -f $HOME/dotfiles/zshrc/.zshrc_secrets ] && source ~/dotfiles/zshrc/.zshrc_secrets
