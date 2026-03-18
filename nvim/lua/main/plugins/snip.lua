@@ -114,6 +114,11 @@ return {
         { i(1) }
       )),
 
+      s('todo', fmta(
+        '% TODO: ',
+        { }
+      )),
+
     })
 
     ls.add_snippets('python', {
