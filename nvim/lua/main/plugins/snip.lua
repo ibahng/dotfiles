@@ -119,6 +119,37 @@ return {
         { }
       )),
 
+      s('enum', fmta(
+        [[
+        \begin{enumerate}
+
+          \item <> 
+
+          \item 
+
+          \item 
+
+        \end{enumerate}
+        ]],
+        { i(1) }
+      )),
+
+      s('item', fmta(
+        [[
+        \begin{itemize}
+
+          \item <> 
+
+          \item 
+
+          \item 
+
+        \end{itemize}
+        ]],
+        { i(1) }
+      )),
+
+
     })
 
     ls.add_snippets('python', {
