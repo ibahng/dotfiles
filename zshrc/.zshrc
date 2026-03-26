@@ -27,20 +27,25 @@ $HOME/bin/scripts/moto_reports:\
 $HOME/.local/bin:\
 $PATH"
 
-# ALIASES =========================================================================================
+# ALIASES ==========================================================================================
 alias oc='opencode'
 alias lg='lazygit'
 alias ca='conda activate'
-alias career='nvim ~/Workspaces/career'
-alias notepad='nvim ~/Workspaces/notepad.txt'
-alias models='nvim ~/Workspaces/models'
-alias reports='nvim ~/Workspaces/reports'
-alias sandbox='nvim ~/Workspaces/sandbox'
-alias research='nvim ~/Research'
-alias vsreports='code ~/Workspaces/reports'
-alias ibahng='nvim ~/ibahng-com'
-alias dotfiles='nvim ~/dotfiles'
 alias rankdisk='sudo du -sh ./* | sort -rh'
+
+# NAVIGATION SHORTCUTS =============================================================================
+career() {cd ~/Workspaces/career && nvim .}
+notepad() { cd ~/Workspaces && nvim notepad.txt }
+models() { cd ~/Workspaces/models && nvim . }
+reports() { cd ~/Workspaces/reports && nvim . }
+sandbox() { cd ~/Workspaces/sandbox && nvim . }
+research() { cd ~/Research && nvim . }
+vsreports() { cd ~/Workspaces/reports && code . }
+ibahng() { cd ~/ibahng-com && nvim . }
+dotfiles() { cd ~/dotfiles && nvim . }
+finflux() { cd ~/Workspaces/.finflux && nvim . }
+finforge() { cd ~/Workspaces/finforge && nvim . }
+biohelix() { cd ~/Workspaces/biohelix && nvim . }
 
 # set history 
 HISTFILE=~/.zsh_history
