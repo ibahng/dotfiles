@@ -22,8 +22,10 @@ if [ -f '/Users/ingyubahng/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ingy
 if [ -f '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="\
+$HOME/edirect:\
 $HOME/bin/scripts/utils:\
 $HOME/bin/scripts/moto_reports:\
+$HOME/bin/scripts/biohelix:\
 $HOME/.local/bin:\
 $PATH"
 

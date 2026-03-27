@@ -1,0 +1,34 @@
+#!/bin/bash
+
+OUT_DIR="$HOME/Workspaces/biohelix/data/protein"
+ACCESSION=$1
+
+# Check if the user actually provided an accession number
+if [ -z "$ACCESSION" ]; then
+    echo "Usage: protein_fetch <accession_number>"
+    exit 1
+fi
+
+# Create the directory if it doesn't exist
+mkdir -p "$OUT_DIR"
+
+# Define the full path for the file
+TARGET_FILE="$OUT_DIR/${ACCESSION}.fasta"
+
+# Logic: Check if file exists, if not, download it
+if [ -f "$TARGET_FILE" ]; then
+    echo "Notice: ${ACCESSION}.fasta already exists in $OUT_DIR. Skipping download."
+else
+    echo "Downloading ${ACCESSION} to $TARGET_FILE..."
+    
+    # Run the NCBI command and redirect output to the file
+    esearch -db protein -query "$ACCESSION" | efetch -format fasta > "$TARGET_FILE"
+    
+    # Check if the download actually worked (file should not be empty)
+    if [ -s "$TARGET_FILE" ]; then
+        echo "Dowloading complete >> $TARGET_FILE"
+    else
+        echo "Error: Could not retrieve data for $ACCESSION. Deleting empty file."
+        rm "$TARGET_FILE"
+    fi
+fi
