@@ -198,6 +198,16 @@ return {
         --   --   modified_format = function(seconds) return require('neo-tree.utils').relative_date(seconds) end
         --   -- }
         -- },
+        ["O"] = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          if path:match('%.pdf$') then
+            vim.fn.jobstart({'open', '-a', 'Skim', path}, {detach = true})
+          else
+            -- Fallback: open normally
+            require("neo-tree.canvas").dispatch("open", state)
+          end
+        end,
       },
     },
     nesting_rules = {
