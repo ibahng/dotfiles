@@ -154,7 +154,7 @@ return {
 
     ls.add_snippets('python', {
 
-      s('ignore', fmta(
+      s('ig', fmta(
         '# type: ignore',
         { }
       )),
