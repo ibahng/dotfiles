@@ -38,6 +38,7 @@ alias rankdisk='sudo du -sh ./* | sort -rh'
 # NAVIGATION SHORTCUTS =============================================================================
 career() {cd ~/Workspaces/career && nvim .}
 notepad() { cd ~/Workspaces && nvim notepad.txt }
+tutor() { cd ~/Workspaces && nvim tutor }
 models() { cd ~/Workspaces/models && nvim . }
 reports() { cd ~/Workspaces/reports && nvim . }
 sandbox() { cd ~/Workspaces/sandbox && nvim . }

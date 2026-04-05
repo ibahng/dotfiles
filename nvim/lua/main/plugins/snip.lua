@@ -119,6 +119,11 @@ return {
         { }
       )),
 
+      s('np', fmta(
+          '\\newpage % -----------------------------------------',
+        { }
+      )),
+
       s('enum', fmta(
         [[
         \begin{enumerate}
