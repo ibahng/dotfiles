@@ -119,6 +119,11 @@ return {
         { }
       )),
 
+      s('ans', fmta(
+          'textcolor{white}{answer}',
+        { }
+      )),
+
       s('np', fmta(
           '\\newpage % -----------------------------------------',
         { }

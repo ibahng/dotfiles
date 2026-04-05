@@ -7,7 +7,6 @@ return {
       "lua_ls",
       "pyright",
       "texlab",
-      "clangd",
     },
   },
   dependencies = {
