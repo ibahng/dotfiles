@@ -124,6 +124,11 @@ return {
         { }
       )),
 
+      s('ans', fmta(
+          'textcolor{white}{answer}',
+        { }
+      )),
+
       s('enum', fmta(
         [[
         \begin{enumerate}
