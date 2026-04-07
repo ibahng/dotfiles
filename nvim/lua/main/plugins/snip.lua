@@ -125,7 +125,7 @@ return {
       )),
 
       s('ans', fmta(
-          'textcolor{white}{answer}',
+          '\\textcolor{white}{answer}',
         { }
       )),
 

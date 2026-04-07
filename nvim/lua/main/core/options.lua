@@ -2,7 +2,16 @@ vim.opt.relativenumber = true                   -- set relative numbered lines
 vim.opt.cmdheight = 4                           -- more space in the neovim command line for displaying messages
 vim.opt.number = true                           -- set numbered lines
 vim.opt.mouse = "a"                             -- allow mouse to be used in neovim
-vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if vim.bo.buftype == "" then
+      vim.opt.fileencoding = "utf-8"
+    end
+  end,
+})
+
+-- vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.ignorecase = true                       -- ignore case in search patterns
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines

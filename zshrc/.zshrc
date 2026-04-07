@@ -36,19 +36,19 @@ alias ca='conda activate'
 alias rankdisk='sudo du -sh ./* | sort -rh'
 
 # NAVIGATION SHORTCUTS =============================================================================
-career() {cd ~/Workspaces/career && nvim .}
+career() {cd ~/Workspaces/career && nvim }
 notepad() { cd ~/Workspaces && nvim notepad.txt }
 tutor() { cd ~/Workspaces && nvim tutor }
-models() { cd ~/Workspaces/models && nvim . }
-reports() { cd ~/Workspaces/reports && nvim . }
-sandbox() { cd ~/Workspaces/sandbox && nvim . }
-research() { cd ~/Research && nvim . }
-vsreports() { cd ~/Workspaces/reports && code . }
-ibahng() { cd ~/ibahng-com && nvim . }
-dotfiles() { cd ~/dotfiles && nvim . }
-finflux() { cd ~/Workspaces/.finflux && nvim . }
-finforge() { cd ~/Workspaces/finforge && nvim . }
-biohelix() { cd ~/Workspaces/biohelix && nvim . }
+models() { cd ~/Workspaces/models && nvim }
+reports() { cd ~/Workspaces/reports && nvim }
+sandbox() { cd ~/Workspaces/sandbox && nvim }
+research() { cd ~/Research && nvim }
+vsreports() { cd ~/Workspaces/reports && code }
+ibahng() { cd ~/ibahng-com && nvim }
+dotfiles() { cd ~/dotfiles && nvim }
+finflux() { cd ~/Workspaces/.finflux && nvim }
+finforge() { cd ~/Workspaces/finforge && nvim }
+biohelix() { cd ~/Workspaces/biohelix && nvim }
 
 # set history 
 HISTFILE=~/.zsh_history
