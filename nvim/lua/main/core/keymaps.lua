@@ -120,4 +120,14 @@ end
 
 vim.keymap.set('n', '<leader>-', insert_section_divider, opts)
 
+vim.keymap.set("n", "<leader>np", function()
+  local notepad = vim.fn.getcwd() .. "/notepad.txt"
+  if vim.fn.filereadable(notepad) == 1 then
+    vim.cmd("edit " .. notepad)
+  else
+    vim.cmd("edit " .. notepad)
+    vim.notify("Created new notepad.txt", vim.log.levels.INFO)
+  end
+end, { desc = "Open notepad.txt in current directory" })
+
 

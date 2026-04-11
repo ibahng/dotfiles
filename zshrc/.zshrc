@@ -14,7 +14,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ingyubahng/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ingyubahng/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -24,7 +23,7 @@ if [ -f '/Users/ingyubahng/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 export PATH="\
 $HOME/edirect:\
 $HOME/bin/scripts/utils:\
-$HOME/bin/scripts/moto_reports:\
+$HOME/bin/scripts/reports:\
 $HOME/bin/scripts/biohelix:\
 $HOME/.local/bin:\
 $PATH"
@@ -36,9 +35,13 @@ alias ca='conda activate'
 alias rankdisk='sudo du -sh ./* | sort -rh'
 
 # NAVIGATION SHORTCUTS =============================================================================
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix; do
+  unalias $func 2>/dev/null
+done
+
 career() {cd ~/Workspaces/career && nvim }
 notepad() { cd ~/Workspaces && nvim notepad.txt }
-tutor() { cd ~/Workspaces && nvim tutor }
+tutor() { cd ~/Workspaces/tutor && nvim }
 models() { cd ~/Workspaces/models && nvim }
 reports() { cd ~/Workspaces/reports && nvim }
 sandbox() { cd ~/Workspaces/sandbox && nvim }

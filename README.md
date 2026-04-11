@@ -61,4 +61,3 @@ mkdir -p $(brew --repository)/Library/Taps/local/homebrew-yabai/Formula
 curl https://raw.githubusercontent.com/asmvik/homebrew-formulae/c9fc60dcb9746ae35a08e1fa8e6eaa2f604a3b92/yabai.rb \\n  -o $(brew --repository)/Library/Taps/local/homebrew-yabai/Formula/yabai.rb
 ```
 
-

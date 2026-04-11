@@ -79,6 +79,11 @@ return {
         '\\uline{<>}',
         { i(1) }
       )),
+
+      s('code', fmta(
+        '\\textcode{<>}',
+        { i(1) }
+      )),
       
       s('ice', fmta(
         '\\ce{<>}',
