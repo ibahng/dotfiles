@@ -35,13 +35,6 @@ ln -s ~/dotfiles/zshrc/.zshrc ~/.zshrc
 ```
 
 ```zsh
-# scripts
-ln -s ~/dotfiles/scripts ~/bin/scripts
-
-chmod +x "script_path"
-```
-
-```zsh
 # hammerspoon
 ln -s ~/dotfiles/hammerspoon/.hammerspoon ~/.hammerspoon
 ```
@@ -49,6 +42,11 @@ ln -s ~/dotfiles/hammerspoon/.hammerspoon ~/.hammerspoon
 ```zsh
 # opencode
 ln -s ~/dotfiles/opencode ~/.config/opencode
+```
+
+```zsh
+# scripts --- also put script directory paths into $PATH
+chmod +x "script_path"
 ```
 
 Feburary 28, 2026 -- There have been some issues regarding yabai-v7.1.17 set up (specifically workspace navigation commands) on macOS Taheo 26.3. The issue was resolved when yabai was downgraded to yabai-v7.1.16.

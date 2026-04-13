@@ -31,3 +31,23 @@ vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#8e93a5' })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#8e93a5' })
 
 vim.g.vimtex_view_skim_activate = 0
+
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  pattern = vim.fn.expand("~/Workspaces/notepad.txt"),
+  callback = function()
+    vim.cmd("colorscheme npcolor")
+    vim.opt.showtabline = 0
+    vim.opt.cmdheight = 0
+    require('lualine').hide()
+  end
+})
+
+vim.api.nvim_create_autocmd({"BufLeave"}, {
+  pattern = vim.fn.expand("~/Workspaces/notepad.txt"),
+  callback = function()
+    vim.cmd("colorscheme npcolor")
+    vim.opt.showtabline = 2
+    vim.opt.cmdheight = 1
+    require('lualine').show()
+  end
+})
