@@ -1,0 +1,38 @@
+#!/bin/bash
+tmux has-session -t fdashboard 2>/dev/null
+
+if [ $? != 0 ]; then
+  # create session
+  tmux new-session -d -s fdashboard -n main
+
+  # split into left and right halves
+  # tmux split-window -h -l 50
+  tmux split-window -h -t fdashboard:main
+  tmux resize-pane -t fdashboard:main.0 -L 30
+
+  # split left half into top and bottom
+  tmux split-window -v -t fdashboard:main.0
+  tmux resize-pane -t fdashboard:main.0 -U 5
+
+  # split right half into top and bottom
+  tmux split-window -v -t fdashboard:main.2
+  tmux resize-pane -t fdashboard:main.2 -D 5
+
+  tmux split-window -h -t fdashboard:main.3
+  tmux resize-pane -t fdashboard:main.4 -L 30
+
+  # # send commands to panes
+  tmux send-keys -t fdashboard:main.0 'ticker --config ~/.ticker-industry.yaml' Enter
+  tmux send-keys -t fdashboard:main.1 'wtfutil --config=~/.config/wtf/finance.yml' Enter
+  tmux send-keys -t fdashboard:main.2 'tickrs -s ^GSPC -c candle -i 5 -t 1D' Enter
+  tmux send-keys -t fdashboard:main.3 'ticker --config ~/.ticker-indices.yaml' Enter
+  tmux send-keys -t fdashboard:main.4 'tickrs --summary' Enter
+
+  # # resize right split up by 3 to give notepad more space
+
+  # attach
+  tmux attach -t fdashboard
+else
+  tmux attach -t fdashboard
+fi
+

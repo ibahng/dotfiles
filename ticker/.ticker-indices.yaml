@@ -1,0 +1,52 @@
+# show-summary: true # the summary line at the top of the interface
+# show-tags: true # the tags USD, Live, Nasdaq below the symbols show-fundamentals: true # mkt cap, volume, day range, 52wk range, prev close/open in the middle
+show-separator: true # the lines that seperate each security
+# show-positions: true # this is the current positions you have defined in lots
+interval: 5
+currency-summary-only: false
+sort: user
+colors:
+  text: "#f0fdff"           # your kitty foreground
+  text-light: "#a9bcc8"
+  text-label: "#6b7588"     # muted blue-gray for labels
+  text-line: "#3d4255"      # subtle line color, just above your bg
+  text-tag: "#b8c8e8"
+  background-tag: "#3d4455"
+  # text: "#FF0000"            # Red
+  # text-light: "#00FF00"      # Green
+  # text-label: "#0000FF"      # Blue
+  # text-line: "#FFFF00"       # Yellow
+  # text-tag: "#A020F0"        # Purple
+  # background-tag: "#FFA500"  # Orange
+groups:
+  - name: indices
+    watchlist:
+      # - ^GSPC # USA
+      - ^N225 # Japan
+      - ^FTSE # United Kingdom
+      - ^GDAXI # Germany
+      - ^FCHI # France
+      - 000001.SS # China
+      - ^HSI # Hong Kong
+      - ^GSPTSE # Canada
+      - ^KS11 # South Korea
+      - ^NSEI # India
+      - ^AXJO # Australia
+      - ^BVSP # Brazil
+
+  - name: forex
+    watchlist:
+      - EURUSD=X # Eurozone
+      - GBPUSD=X # United Kingdom
+      - JPYUSD=X # Japan
+      - KRWUSD=X # South Korea
+      - CNHUSD=X # China (Offshore)
+      - AUDUSD=X # Australia
+      - CADUSD=X # Canada
+      - CHFUSD=X # Switzerland
+      - HKDUSD=X # Hong Kong
+      - SGDUSD=X # Singapore
+      - INRUSD=X # India
+      - BRLUSD=X # Brazil
+      - MXNUSD=X # Mexico
+

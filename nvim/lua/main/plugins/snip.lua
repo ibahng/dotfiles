@@ -153,7 +153,7 @@ return {
         [[
         \begin{itemize}
 
-          \item <> 
+          \item<> 
 
           \item 
 

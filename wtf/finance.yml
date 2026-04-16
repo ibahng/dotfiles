@@ -1,0 +1,73 @@
+wtf:
+  colors:
+      background: "#2a2e38"
+      border:
+        normal: "#d8d8da"
+      highlight:
+        fore: "black"
+        back: "green"
+      text: "white"
+      title: "white"
+  grid:
+    columns: [45,45]
+    rows: [9, 30]
+  refreshInterval: 1
+  mods:
+    clocks:
+      enabled: true
+      position:
+        top: 0
+        left: 0
+        height: 1
+        width: 1
+      refreshInterval: 1
+      sort: "chronological"
+      title: "World Clocks"
+      locations:
+        Tokyo: "Asia/Tokyo"
+        Singapore: "Asia/Singapore"
+        London: "Europe/London"
+        New York: "America/New_York"
+        Frankfurt: "Europe/Berlin"
+        Mumbai: "Asia/Kolkata"
+        Hong Kong: "Asia/Hong_Kong"
+
+    digitalclock:
+      color: white
+      enabled: true
+      font: digitalfont
+      hourFormat: 12
+      position:
+        top: 0
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 1s
+      title: "Local Time"
+      type: "digitalclock"
+      withDatePrefix: false
+      withUTC: false
+      withEpoch: false
+
+    feedreader:
+      enabled: true
+      title: "News"
+      focusable: false
+      showSource: false
+      feeds:
+        - https://feeds.content.dowjones.io/public/rss/socialpoliticsfeed
+        - https://feeds.content.dowjones.io/public/rss/RSSWorldNews
+        - https://www.ft.com/markets?format=rss
+        - https://www.ft.com/companies?format=rss
+      feedLimit: -1
+      position:
+        top: 1
+        left: 0
+        height: 1
+        width: 2
+      refreshInterval: 15m
+
+
+
+
+
