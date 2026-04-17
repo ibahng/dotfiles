@@ -35,7 +35,7 @@ alias ca='conda activate'
 alias rankdisk='sudo du -sh ./* | sort -rh'
 
 # NAVIGATION SHORTCUTS =============================================================================
-for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix; do
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal; do
   unalias $func 2>/dev/null
 done
 
@@ -52,6 +52,7 @@ dotfiles() { cd ~/dotfiles && nvim }
 finflux() { cd ~/Workspaces/.finflux && nvim }
 finforge() { cd ~/Workspaces/finforge && nvim }
 biohelix() { cd ~/Workspaces/biohelix && nvim }
+personal() { cd ~/Workspaces/personal && nvim }
 
 # set history 
 HISTFILE=~/.zsh_history
