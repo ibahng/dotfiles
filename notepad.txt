@@ -1,0 +1,9 @@
+Hyprland --- window manager
+Waybar --- status bar
+Rofi/Wofi --- app launcher
+Dunst/Mako --- notifications
+Hyprpaper/Swww --- wallpaper
+Kitty --- terminal (you already have this)
+Zathura --- pdf viewer
+Calendar app for linux?
+
