@@ -10,5 +10,7 @@ nmap "]" "gt"
 nnoremap "(" "fh"
 nnoremap ")" "fl"
 
+color "type=STRG fg=WHITE bg=DEFAULT_COLOR"
+
 
 
