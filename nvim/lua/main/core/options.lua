@@ -5,8 +5,8 @@ vim.opt.mouse = "a"                             -- allow mouse to be used in neo
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    if vim.bo.buftype == "" then
-      vim.opt.fileencoding = "utf-8"
+    if vim.bo.buftype == "" and vim.bo.modifiable then
+      vim.bo.fileencoding = "utf-8"
     end
   end,
 })
