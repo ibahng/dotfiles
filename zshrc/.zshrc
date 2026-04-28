@@ -33,6 +33,8 @@ alias oc='opencode'
 alias lg='lazygit'
 alias ca='conda activate'
 alias rankdisk='sudo du -sh ./* | sort -rh'
+alias mydesk='yazi ~/myDesktop'
+alias wall='yazi ~/Pictures/Wallpapers'
 
 # NAVIGATION SHORTCUTS =============================================================================
 for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics; do
@@ -167,3 +169,4 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/ingyubahng/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f $HOME/dotfiles/zshrc/.zshrc_secrets ] && source ~/dotfiles/zshrc/.zshrc_secrets
+

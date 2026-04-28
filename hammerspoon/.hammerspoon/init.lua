@@ -28,161 +28,23 @@ hs.hotkey.bind({"alt"}, "\\", function()
   hs.application.launchOrFocus("kitty")
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
+  hs.reload()
+end)
+hs.alert.show("Config loaded")
+
 -- 1. Configuration
 local desktopStyle = {
     fontName = "SFMono-Regular",
     statsSize = 12,
     color = { white = 1, alpha = 0.8 },
-    position = { x = 40, y = 70, w = 700, h = 267 } 
+    position = { x = 40, y = 70, w = 760, h = 340 } 
 }
 
 -- 2. Create the Canvas
 local infoCanvas = hs.canvas.new(desktopStyle.position)
 infoCanvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces)
 infoCanvas:level(hs.canvas.windowLevels.desktopIcon)
-
--- 3. Helper: Get System Stats
-local function getSystemStats()
-    local function safe(fn)
-        local ok, result = pcall(fn)
-        return ok and result or "ERROR"
-    end
-    local username = safe(function()
-        local user = hs.execute("whoami"):gsub("%s+", "")
-        local host = hs.execute("hostname -s"):gsub("%s+", "")
-        return user .. "@" .. host
-    end)
-    local os_ver = safe(function()
-        local name = hs.execute("sw_vers -productName"):gsub("%s+", "")
-        local version = hs.execute("sw_vers -productVersion"):gsub("%s+", "")
-        local build = hs.execute("sw_vers -buildVersion"):gsub("%s+", "")
-        local arch = hs.execute("uname -m"):gsub("%s+", "")
-        return string.format("%s %s (%s) %s", name, version, build, arch)
-    end)
-    local host = safe(function()
-        local name = hs.execute("system_profiler SPHardwareDataType | awk -F': ' '/Model Name/{print $2}'"):gsub("%s+$", "")
-        local chip = hs.execute("system_profiler SPHardwareDataType | awk -F': ' '/Chip/{print $2}'"):gsub("%s+$", "")
-        return string.format("%s (%s, 2020)", name, chip)
-    end)
-    local kernel = safe(function()
-        return hs.execute("uname -sr"):gsub("%s+$", "")
-    end)
-    local uptime = safe(function()
-        local u = hs.execute("sysctl -n kern.boottime | awk '{print $4}' | tr -d ','")
-        local boot = tonumber(u)
-        local now = os.time()
-        local diff = now - boot
-        local days = math.floor(diff / 86400)
-        local hours = math.floor((diff % 86400) / 3600)
-        local mins = math.floor((diff % 3600) / 60)
-        return string.format("%d days, %d hours, %d mins", days, hours, mins)
-    end)
-    local shell = safe(function()
-        local s = hs.execute("zsh --version"):match("zsh (%S+)")
-        return "zsh " .. (s or "ERROR")
-    end)
-    local displays = safe(function()
-        local result = {}
-        for _, screen in ipairs(hs.screen.allScreens()) do
-            local name = screen:name()
-            local mode = screen:currentMode()
-            local tag = (screen == hs.screen.primaryScreen()) and "[Built-in]" or "[External]"
-            table.insert(result, string.format("%dx%d @ %dHz %s", mode.w, mode.h, mode.freq, tag))
-        end
-        return result
-    end)
-    local wm = safe(function()
-        local v = hs.execute("defaults read /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/Info.plist CFBundleShortVersionString"):gsub("%s+", "")
-        return "Quartz Compositor " .. v .. " (with Yabai)"
-    end)
-    local wm_theme = safe(function()
-        local dark = hs.execute("defaults read -g AppleInterfaceStyle 2>/dev/null"):gsub("%s+", "")
-        local mode = (dark == "Dark") and "Dark" or "Light"
-        local accent = hs.execute("defaults read -g AppleAccentColor 2>/dev/null"):gsub("%s+", "")
-        local colors = { ["-1"] = "Graphite", ["0"] = "Red", ["1"] = "Orange", ["2"] = "Yellow", ["3"] = "Green", ["4"] = "Blue", ["5"] = "Purple", ["6"] = "Pink" }
-        local color = colors[accent] or "Blue"
-        return color .. " (" .. mode .. ")"
-    end)
-    local load = safe(function()
-        local cpu = hs.host.cpuUsage()
-        return string.format("Apple M1 (8) @ 3.20 GHz  [%.1f%% load]", cpu.overall.active)
-    end)
-    local gpu = safe(function()
-        local cores = hs.execute("system_profiler SPDisplaysDataType | awk -F': ' '/Total Number of Cores/{print $2}'"):gsub("%s+$", "")
-        return string.format("Apple M1 (%s) [Integrated]", cores)
-    end)
-    local mem = safe(function()
-        local m = hs.host.vmStat()
-        local pageSize = m.pageSize
-        local memTotal = m.memSize / (1024^3)
-        local memUsed = (m.pagesActive + m.pagesWiredDown + m.pagesUsedByVMCompressor) * pageSize / (1024^3)
-        local pct = (memUsed / memTotal) * 100
-        return string.format("%.2f GiB / %.2f GiB (%.0f%%)", memUsed, memTotal, pct)
-    end)
-    local swap = safe(function()
-        local s = hs.execute("sysctl -n vm.swapusage")
-        local used = s:match("used = (%S+)M")
-        local total = s:match("total = (%S+)M")
-        if used and total then
-            local usedN = tonumber(used) / 1024
-            local totalN = tonumber(total) / 1024
-            local pct = (usedN / totalN) * 100
-            return string.format("%.2f GiB / %.2f GiB (%.0f%%)", usedN, totalN, pct)
-        end
-        return "ERROR"
-    end)
-    local ip = safe(function()
-        return hs.execute("ipconfig getifaddr en0"):gsub("%s+", "") .. "/24"
-    end)
-    local locale = safe(function()
-        return hs.execute("defaults read -g AppleLocale"):gsub("%s+", "") .. ".UTF-8"
-    end)
-
-    local boldFont  = { name = "SFMono-Bold", size = desktopStyle.statsSize }
-    local normFont  = { name = desktopStyle.fontName, size = desktopStyle.statsSize }
-    local keyColor  = { white = 1, alpha = 0.9 }
-    local valColor  = { white = 1, alpha = 0.85 }
-    local para      = { alignment = "left" }
-
-    local function line(key, value)
-        return hs.styledtext.new(key .. ": ", { font = boldFont, color = keyColor, paragraphStyle = para })
-            .. hs.styledtext.new(value .. "\n", { font = normFont, color = valColor, paragraphStyle = para })
-    end
-
-    local result = hs.styledtext.new(username .. "\n", {
-        font = boldFont,
-        color = { hex = "#5BA4CF", alpha = 1.0 },
-        paragraphStyle = para
-    })
-    .. hs.styledtext.new(string.rep("-", #username) .. "\n", {
-        font = normFont,
-        color = { white = 1, alpha = 0.4 },
-        paragraphStyle = para
-    })
-    .. line("OS", os_ver)
-        .. line("Host", host)
-        .. line("Kernel", kernel)
-        .. line("Uptime", uptime)
-        .. line("Shell", shell)
-
-    if type(displays) == "table" then
-        for i, screen in ipairs(hs.screen.allScreens()) do
-            result = result .. line("Display (" .. screen:name() .. ")", displays[i] or "ERROR")
-        end
-    end
-
-    result = result
-        .. line("WM", wm)
-        .. line("WM Theme", wm_theme)
-        .. line("CPU", load)
-        .. line("GPU", gpu)
-        .. line("Memory", mem)
-        .. line("Swap", swap)
-        .. line("Local IP (en0)", ip)
-        .. line("Locale", locale)
-
-    return result
-end
 
 local appleAscii = [[
                     'c.       
@@ -204,33 +66,192 @@ local appleAscii = [[
        .cooc,.    .,coo:.     
 ]]
 
--- 4. Define the Update Function
+
+local function getSystemStats()
+    local output = hs.execute("/opt/homebrew/bin/fastfetch --format json 2>/dev/null")
+    local data = hs.json.decode(output)
+
+    -- Index the results by type
+    local d = {}
+    for _, item in ipairs(data) do
+        if not item.error then
+            d[item.type] = item.result
+        end
+    end
+
+    -- Title
+    local username = d["Title"].userName .. "@" .. d["Title"].hostName:gsub("%.local", "")
+
+    -- OS
+    local os_ver = string.format("%s %s %s (%s) arm64", d["OS"].name, d["OS"].codename, d["OS"].version, d["OS"].buildID)
+
+    -- Host
+    local host = d["Host"].name
+
+    -- Kernel
+    local kernel = string.format("%s %s", d["Kernel"].name, d["Kernel"].release)
+
+    -- Uptime
+    local diff = math.floor(d["Uptime"].uptime / 1000000000)
+    local days = math.floor(diff / 86400)
+    local hours = math.floor((diff % 86400) / 3600)
+    local mins = math.floor((diff % 3600) / 60)
+    local uptime = string.format("%d days, %d hours, %d mins", days, hours, mins)
+
+    -- Packages
+    local packages = string.format("%d (brew), %d (brew-cask)", d["Packages"].brew, d["Packages"].brewCask)
+
+    -- Displays
+    local displayLines = {}
+    for _, disp in ipairs(d["Display"]) do
+        local tag = disp.type == "Builtin" and "[Built-in]" or "[External]"
+        table.insert(displayLines, {
+            key = string.format("Display (%s)", disp.name),
+            val = string.format("%dx%d @ %.0fHz %s", disp.output.width, disp.output.height, disp.output.refreshRate, tag)
+        })
+    end
+
+    -- WM
+    local wm = string.format("%s %s (with %s)", d["WM"].prettyName, d["WM"].version, d["WM"].pluginName)
+
+    -- WM Theme
+    local wm_theme = d["WMTheme"]
+
+    -- Theme
+    local theme = d["Theme"].theme1
+
+    -- Font
+    local font_str = d["Font"].display
+
+    -- Cursor
+    local cursor = string.format("%s (%spx)", d["Cursor"].theme, d["Cursor"].size)
+
+    -- CPU with live usage
+    local cpuUsage = hs.host.cpuUsage()
+    local cpuLoad = (cpuUsage and cpuUsage.overall) and cpuUsage.overall.active or 0
+    local cpu = string.format("%s (%d) @ %.2f GHz (%.1f%%)", d["CPU"].cpu, d["CPU"].cores.physical, d["CPU"].frequency.max / 1000, cpuLoad)
+
+    -- GPU
+    local gpu_data = d["GPU"][1]
+    local gpu = string.format("%s (%d) [%s]", gpu_data.name, gpu_data.coreCount, gpu_data.type)
+
+    -- Memory
+    local memUsed = d["Memory"].used / (1024^3)
+    local memTotal = d["Memory"].total / (1024^3)
+    local memPct = (memUsed / memTotal) * 100
+    local mem = string.format("%.2f GiB / %.2f GiB (%.0f%%)", memUsed, memTotal, memPct)
+
+    -- Swap
+    local swapUsed = d["Swap"][1].used / (1024^3)
+    local swapTotal = d["Swap"][1].total / (1024^3)
+    local swapPct = (swapUsed / swapTotal) * 100
+    local swap = string.format("%.2f GiB / %.2f GiB (%.0f%%)", swapUsed, swapTotal, swapPct)
+
+    -- Disk (first non-hidden volume)
+    local disk_data = d["Disk"][1]
+    local diskUsed = disk_data.bytes.used / (1024^3)
+    local diskTotal = disk_data.bytes.total / (1024^3)
+    local diskPct = (diskUsed / diskTotal) * 100
+    local diskType = table.concat(disk_data.volumeType, ", ")
+    local disk = string.format("%.2f GiB / %.2f GiB (%.0f%%) - %s [%s]", diskUsed, diskTotal, diskPct, disk_data.filesystem, diskType)
+
+    -- IP
+    local ip = d["LocalIp"][1].ipv4
+
+    -- Battery
+    local batt_data = d["Battery"][1]
+    local battStatus = table.concat(batt_data.status, ", ")
+    local batt
+    if batt_data.timeRemaining and battStatus == "Discharging" then
+        local tr = math.floor(batt_data.timeRemaining)
+        local bHours = math.floor(tr / 3600)
+        local bMins = math.floor((tr % 3600) / 60)
+        batt = string.format("(%s): %.0f%% (%d hours, %d mins remaining) [%s]", batt_data.modelName, batt_data.capacity, bHours, bMins, battStatus)
+    else
+        batt = string.format("(%s): %.0f%% [%s]", batt_data.modelName, batt_data.capacity, battStatus)
+    end
+
+    -- Power Adapter
+    local power = (d["PowerAdapter"] and d["PowerAdapter"][1]) and
+        string.format("%dW", d["PowerAdapter"][1].watts) or "N/A"
+
+    -- Build styled text
+    local boldFont  = { name = "SFMono-Bold", size = desktopStyle.statsSize }
+    local normFont  = { name = desktopStyle.fontName, size = desktopStyle.statsSize }
+    local keyColor  = { white = 1, alpha = 1.0 }
+    local valColor  = { white = 1, alpha = 0.8 }
+    local para      = { alignment = "left" }
+
+    local function line(key, value)
+        return hs.styledtext.new(key .. ": ", { font = boldFont, color = keyColor, paragraphStyle = para })
+            .. hs.styledtext.new(value .. "\n", { font = normFont, color = valColor, paragraphStyle = para })
+    end
+
+    local result = hs.styledtext.new(username .. "\n", {
+        font = boldFont,
+        color = { hex = "#5BA4CF", alpha = 1.0 },
+        paragraphStyle = para
+    })
+    .. hs.styledtext.new(string.rep("-", #username) .. "\n", {
+        font = normFont,
+        color = { white = 1, alpha = 0.4 },
+        paragraphStyle = para
+    })
+    .. line("OS", os_ver)
+    .. line("Host", host)
+    .. line("Kernel", kernel)
+    .. line("Uptime", uptime)
+    .. line("Packages", packages)
+
+    for _, disp in ipairs(displayLines) do
+        result = result .. line(disp.key, disp.val)
+    end
+
+    result = result
+        .. line("WM", wm)
+        .. line("WM Theme", wm_theme)
+        .. line("Theme", theme)
+        .. line("Font", font_str)
+        .. line("Cursor", cursor)
+        .. line("CPU", cpu)
+        .. line("GPU", gpu)
+        .. line("Memory", mem)
+        .. line("Swap", swap)
+        .. line("Disk (/)", disk)
+        .. line("Local IP (en0)", ip)
+        .. line("Battery", batt)
+        .. line("Power Adapter", power)
+
+    return result
+end
+
+-- 4. Define the Update Function 
 local function updateDisplay()
-    local styledText = getSystemStats()
+  local styledText = getSystemStats()
 
-    infoCanvas[1] = {
-        type = "rectangle",
-        action = "fill",
-        fillColor = { red = 0.15, green = 0.15, blue = 0.15, alpha = 0.4 },  -- dark charcoal
-        roundedRectRadii = { xRadius = 10, yRadius = 10 },
-        frame = { x = "0%", y = "0%", w = "100%", h = "100%" }
-    }
+  infoCanvas[1] = {
+    type = "rectangle",
+    action = "fill",
+    fillColor = { red = 0.15, green = 0.15, blue = 0.15, alpha = 0.4 },  -- dark charcoal
+    roundedRectRadii = { xRadius = 10, yRadius = 10 },
+    frame = { x = "0%", y = "0%", w = "100%", h = "100%" }
+  }
 
-    infoCanvas[2] = {
-        type = "text",
-        text = hs.styledtext.new(appleAscii, {
-            font = { name = desktopStyle.fontName, size = 10.3 },
-            color = { white = 1, alpha = 0.8 },
-            paragraphStyle = { alignment = "left" }
-        }),
-        frame = { x = 15, y = 30, w = 200, h = 245 }
-    }
+  infoCanvas[2] = {
+    type = "text",
+    text = hs.styledtext.new(appleAscii, {
+      font = { name = desktopStyle.fontName, size = 10.3 },
+      color = { white = 1, alpha = 0.8 },
+      paragraphStyle = { alignment = "left" }
+    }),
+    frame = { x = 15, y = 55, w = 200, h = 500 }
+  }
 
-    infoCanvas[3] = {
-        type = "text",
-        text = styledText,
-        frame = { x = 230, y = 15, w = 480, h = 245 }
-    }
+  infoCanvas[3] = {
+    type = "text",
+    text = styledText,
+    frame = { x = 230, y = 15, w = 600, h = 500 }
+  }
 end
 
 -- 5. Initialize and Start
@@ -241,9 +262,44 @@ infoCanvas:show()
 if infoTimer then infoTimer:stop() end
 infoTimer = hs.timer.doEvery(1, updateDisplay)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
-  hs.reload()
-end)
-hs.alert.show("Config loaded")
+-- -- Spotify Now Playing Canvas
+-- spotifyCanvas = hs.canvas.new({ x = 40, y = 420, w = 400, h = 50 })
+-- spotifyCanvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces)
+-- spotifyCanvas:level(hs.canvas.windowLevels.desktopIcon)
 
-print(hs.execute("df -k /"))
+-- local boldFont = { name = "SFMono-Bold", size = 12 }
+-- local normFont = { name = "SFMono-Regular", size = 12 }
+
+-- local function updateSpotify()
+--   if not hs.spotify.isRunning() then
+--     spotifyCanvas[1] = {
+--       type = "text",
+--       text = hs.styledtext.new("Spotify not running", {
+--         font = normFont,
+--         color = { white = 1, alpha = 0.4 },
+--         paragraphStyle = { alignment = "left" }
+--       }),
+--       frame = { x = 10, y = 12, w = 380, h = 30 }
+--     }
+--     return
+--   end
+
+--   local track  = hs.spotify.getCurrentTrack()  or "Unknown"
+--   local artist = hs.spotify.getCurrentArtist() or "Unknown"
+
+--   local styledLine = hs.styledtext.new("♫  ", { font = boldFont, color = { hex = "#5BA4CF", alpha = 1.0 } })
+--     .. hs.styledtext.new(track, { font = boldFont, color = { white = 1, alpha = 1.0 } })
+--     .. hs.styledtext.new("  —  " .. artist, { font = normFont, color = { white = 1, alpha = 0.6 } })
+
+--   spotifyCanvas[1] = {
+--     type = "text",
+--     text = styledLine,
+--     frame = { x = 10, y = 12, w = 380, h = 30 }
+--   }
+-- end
+
+-- updateSpotify()
+-- spotifyCanvas:show()
+
+-- if spotifyTimer then spotifyTimer:stop() end
+-- spotifyTimer = hs.timer.doEvery(1, updateSpotify)
