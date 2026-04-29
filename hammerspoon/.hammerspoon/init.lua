@@ -12,6 +12,10 @@ spoon = spoon
 -- end)
 
 
+hs.hotkey.bind({"alt"}, "-", function()
+  hs.application.launchOrFocus("Claude")
+end)
+
 hs.hotkey.bind({"alt"}, "`", function()
   hs.application.launchOrFocus("ChatGPT")
 end)

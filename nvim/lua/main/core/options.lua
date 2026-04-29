@@ -38,6 +38,7 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
     vim.cmd("colorscheme npcolor")
     vim.opt.showtabline = 0
     vim.opt.cmdheight = 0
+    vim.opt.scrolloff = 12
     require('lualine').hide()
   end
 })
@@ -48,6 +49,7 @@ vim.api.nvim_create_autocmd({"BufLeave"}, {
     vim.cmd("colorscheme npcolor")
     vim.opt.showtabline = 2
     vim.opt.cmdheight = 1
+    vim.opt.scrolloff = 20
     require('lualine').show()
   end
 })
