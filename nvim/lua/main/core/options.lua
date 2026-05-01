@@ -53,3 +53,16 @@ vim.api.nvim_create_autocmd({"BufLeave"}, {
     require('lualine').show()
   end
 })
+
+-- init.lua
+vim.api.nvim_set_hl(0, "Normal", { fg = "#DCD7BA", bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "none", bg = "none" })
+
+vim.api.nvim_set_hl(0, "NeoTreeNormal", { fg = "#DCD7BA", bg = "none" })
+vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { fg = "#DCD7BA", bg = "none" })
+vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#DCD7BA", bg = "none" })
+vim.api.nvim_set_hl(0, "NeoTreeFileNameOpened", { fg = "#DCD7BA", bg = "none" })
+

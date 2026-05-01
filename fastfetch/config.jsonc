@@ -1,0 +1,40 @@
+{
+  "logo": {
+    "type": "builtin",
+    "source": "macos"
+  },
+  "display": {
+    "color": {
+      "keys": "38;2;234;235;236",
+      "title": "38;2;91;164;207",
+      "separator": "38;2;204;204;204",
+      "output": "38;2;220;220;220"
+    }
+  },
+  "modules": [
+    "Title",
+    "Separator",
+    "OS",
+    "Host",
+    "Kernel",
+    "Uptime",
+    "Packages",
+    "Shell",
+    "Display",
+    "WM",
+    "Theme",
+    "Font",
+    "Cursor",
+    "Terminal",
+    // "CPU",
+    // "GPU",
+    // "Memory",
+    // "Swap",
+    // "Disk",
+    "LocalIP",
+    "Battery",
+    "PowerAdapter"
+    // "Locale",
+    // "Colors"
+  ]
+}

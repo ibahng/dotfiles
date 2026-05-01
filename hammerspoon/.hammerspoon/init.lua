@@ -266,7 +266,7 @@ hs.alert.show("Config loaded")
 -- if infoTimer then infoTimer:stop() end
 -- infoTimer = hs.timer.doEvery(1, updateDisplay)
 
--- -- Spotify Now Playing Canvas
+-- -- Spotify Now Playing Canvas ===================================================================
 -- spotifyCanvas = hs.canvas.new({ x = 40, y = 420, w = 400, h = 50 })
 -- spotifyCanvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces)
 -- spotifyCanvas:level(hs.canvas.windowLevels.desktopIcon)
