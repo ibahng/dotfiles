@@ -1,6 +1,6 @@
 # finance.widget
 command: "/Users/ingyubahng/dotfiles/ubersicht/ticker.widget/fetch_tickers.sh"
-refreshFrequency: 60000
+refreshFrequency: 30000
 style: """
   top: 258px;
   left: 725px;
@@ -46,12 +46,12 @@ style: """
     color: #EAEBEC;
   }
   .col-price {
-    width: 75px;
+    width: 65px;
     text-align: right;
     color: #EAEBEC;
   }
   .col-change {
-    width: 65px;
+    width: 75px;
     text-align: right;
     color: #EAEBEC;
   }

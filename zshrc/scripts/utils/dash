@@ -8,16 +8,9 @@ if [ $? != 0 ]; then
   # split into left and right halves
   tmux split-window -h -t dashboard:main
 
-  # split right half into top (wtfutil) and bottom (notepad)
-  tmux split-window -v -t dashboard:main.1
-
   # send commands to panes
   tmux send-keys -t dashboard:main.0 'taskwarrior-tui' Enter
-  tmux send-keys -t dashboard:main.1 'wtfutil' Enter
-  tmux send-keys -t dashboard:main.2 'notepad' Enter
-
-  # resize right split up by 3 to give notepad more space
-  tmux resize-pane -t dashboard:main.2 -U 10
+  tmux send-keys -t dashboard:main.1 'notepad' Enter
 
   # attach
   tmux attach -t dashboard

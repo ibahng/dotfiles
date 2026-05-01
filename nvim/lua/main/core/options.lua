@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
     vim.cmd("colorscheme npcolor")
     vim.opt.showtabline = 0
     vim.opt.cmdheight = 0
-    vim.opt.scrolloff = 12
     require('lualine').hide()
   end
 })
@@ -49,7 +48,6 @@ vim.api.nvim_create_autocmd({"BufLeave"}, {
     vim.cmd("colorscheme npcolor")
     vim.opt.showtabline = 2
     vim.opt.cmdheight = 1
-    vim.opt.scrolloff = 20
     require('lualine').show()
   end
 })
@@ -65,4 +63,18 @@ vim.api.nvim_set_hl(0, "NeoTreeNormal", { fg = "#DCD7BA", bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { fg = "#DCD7BA", bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#DCD7BA", bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeFileNameOpened", { fg = "#DCD7BA", bg = "none" })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
