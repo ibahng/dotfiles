@@ -41,6 +41,6 @@ yabai -m config normal_window_opacity 0.90
 borders active_color=0xFFE9A178 inactive_color=0x00000000 width=8.0 &
 
 # SKETCHYBAR TOP PADDING ===========================================================================
-yabai -m config external_bar all:30:0
+yabai -m config external_bar all:26:0
 
 yabai -m rule --add app="kitty" title="desktop-term" layer=below manage=off

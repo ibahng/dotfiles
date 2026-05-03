@@ -6,7 +6,7 @@ style: """
   color: #fff;
   font-family: 'SF Mono', monospace;
   font-size: 11.5px;
-  background: rgba(0,0,0, 0.2);
+  background: rgba(0,0,0, 0.4);
   border-radius: 10px;  
   padding: 20px;
   width: 660px;

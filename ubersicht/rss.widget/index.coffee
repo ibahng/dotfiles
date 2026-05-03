@@ -15,7 +15,7 @@ style: """
   width: 660px;
   left: 10px;
   top: 765px;
-  background: rgba(0,0,0, 0.2);
+  background: rgba(0,0,0, 0.4);
 
   ul
     margin: 4px 0 8px 0;

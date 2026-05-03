@@ -10,6 +10,7 @@ export const className = `
   position: absolute;
   top: 50px;
   left: 10px;
+  width: 700px;
   z-index: 10;
 `;
 // ── Paste your ASCII logo here ──────────────────────────────────────────────
@@ -83,10 +84,16 @@ export const render = ({ output }) => {
     : pre;
 
   // Strip all color styles from aha output so everything inherits white
-  const cleanStats = statsPart.replace(/\s*color:[^;"]+;?/g, "");
+  const cleanStats = statsPart
+    .replace(/\s*color:[^;"]+;?/g, "")
+    .replace(/\[Discharging\]/g, "");
+
+  const finalStats = cleanStats.includes("Power Adapter")
+    ? cleanStats
+    : cleanStats.replace(/(Battery[^\n]*\n)/, "$1<b>Power Adapter</b>: N/A\n");
 
   const separator = "─".repeat(29);
-  const textPart = `<span style="font-weight:bold;color:#5ba4cf;">${userHost}</span>\n${separator}\n${cleanStats}`;
+  const textPart = `<span style="font-weight:bold;color:#5ba4cf;">${userHost}</span>\n${separator}\n${finalStats}`;
   return (
     <div style={{
       display: "flex",
@@ -95,16 +102,22 @@ export const render = ({ output }) => {
       gap: "30px",
       fontFamily: "'SF Mono', monospace",
       fontSize: "11.5px",
-      whiteSpace: "pre-wrap",
-      backgroundColor: "rgba(0,0,0, 0.2)",
+      backgroundColor: "rgba(0,0,0, 0.4)",
       color: "#FFFFFF",
       padding: "20px",
       borderRadius: "10px",
+      overflow: "hidden",
+      width: "660px",
+      height: "250px",
     }}>
       {/* Hardcoded ASCII logo */}
-      <div style={{ color: "#EAEBEC", fontSize: "5.7px" }}>{ASCII_LOGO}</div>
+      <div style={{ color: "#EAEBEC", fontSize: "5.7px", whiteSpace: "pre" }}>{ASCII_LOGO}</div>
       {/* user@host + separator + stats */}
-      <div dangerouslySetInnerHTML={{ __html: textPart }} />
+      <div style={{
+        overflow: "hidden",
+        minWidth: 0,
+        whiteSpace: "pre",
+      }} dangerouslySetInnerHTML={{ __html: textPart }} />
     </div>
   );
 };

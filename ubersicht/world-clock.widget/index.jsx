@@ -21,7 +21,7 @@ export const className = `
   font-family: 'SF Mono', monospace;
   font-size: 12px;
   z-index: 1;
-  background-color: rgba(0,0,0, 0.2);
+  background-color: rgba(0,0,0, 0.4);
   padding: 20px;
   width: 262px;
   border-radius: 10px;

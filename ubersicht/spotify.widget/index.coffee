@@ -7,7 +7,7 @@ style: """
   font-family: 'SF Mono', monospace;
   font-size: 11.5px;
   color: #EAEBEC;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.4);
   padding: 20px;
   border-radius: 10px;
   width: 400px;
