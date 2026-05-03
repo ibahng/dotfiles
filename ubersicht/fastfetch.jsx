@@ -56,7 +56,8 @@ const ASCII_LOGO = `
                  ........             .......
 `;
 // ────────────────────────────────────────────────────────────────────────────
-export const render = ({ output }) => {
+export const render = ({ output, display }) => {
+  if (display && display.index !== 0) return null;
   if (!output) return <div>Loading...</div>;
   // ── 1. Extract JSON block to get user@host ─────────────────────────────
   const jsonMatch = output.match(/JSONSTART\n([\s\S]*?)\nJSONEND/);

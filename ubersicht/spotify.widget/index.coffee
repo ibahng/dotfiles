@@ -17,22 +17,22 @@ style: """
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   .artist
     color: rgba(234, 235, 236, 0.6);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   .album
     color: rgba(234, 235, 236, 0.4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   .divider
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   .progress-row
     display: flex;
     flex-direction: row;
