@@ -64,8 +64,12 @@ vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { fg = "#DCD7BA", bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#DCD7BA", bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeFileNameOpened", { fg = "#DCD7BA", bg = "none" })
 
-
-
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "text",
+  callback = function()
+    vim.bo.commentstring = "# %s"
+  end,
+})
 
 
 
