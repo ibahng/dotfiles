@@ -47,12 +47,18 @@ return {
     })
 
     ls.add_snippets('tex', {
+
       s('electron', t(
         '\\ce{e^-}'
       )),
 
       s('proton', t(
         '\\ce{H+}'
+      )),
+
+      s('ar', fmta(
+        '\\autoref{<>}',
+        { i(1) }
       )),
 
       s('tb', fmta(

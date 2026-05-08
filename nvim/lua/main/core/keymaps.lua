@@ -129,5 +129,3 @@ vim.keymap.set("n", "<leader>np", function()
     vim.notify("Created new notepad.txt", vim.log.levels.INFO)
   end
 end, { desc = "Open notepad.txt in current directory" })
-
-
