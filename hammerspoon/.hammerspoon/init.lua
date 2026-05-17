@@ -20,6 +20,10 @@ hs.hotkey.bind({"alt"}, "`", function()
   hs.application.launchOrFocus("Claude")
 end)
 
+hs.hotkey.bind({"alt"}, "G", function()
+  hs.application.launchOrFocus("Gemini")
+end)
+
 hs.hotkey.bind({"alt"}, "-", function()
   hs.application.launchOrFocus("ChatGPT")
 end)
