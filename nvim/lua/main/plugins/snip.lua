@@ -219,6 +219,38 @@ return {
         { i(1) }
       )),
 
+      s('myfig', fmta(
+        '\\myfig{0.5}{<>_figures/<>.png}{<>}{fig:<>}',
+        { f(function() return vim.fn.expand("%:t:r") end, {}), i(1), i(2), i(3) }
+      )),
+
+      s('pgfig', fmta(
+        [[
+        \pgfig{
+          <>
+        }{<>}{fig:<>}{<>}
+        ]],
+        { i(1), i(2), i(3), i(4) }
+      )),
+
+      s('axis', fmta(
+        [[
+        \begin{axis}[
+          width=5cm,
+          height=5cm,
+          xlabel={placeholder},
+          ylabel={placeholder},
+          xmin=0, xmax=#,
+          ymin=0, ymax=#,
+          domain=0:#,
+          ]
+
+          <>
+
+        \end{axis}
+        ]],
+        { i(1) }
+      )),
 
     })
 
