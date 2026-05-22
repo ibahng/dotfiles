@@ -130,13 +130,3 @@ vim.keymap.set("n", "<leader>np", function()
   end
 end, { desc = "Open notepad.txt in current directory" })
 
-vim.keymap.set({"i", "s"}, "<Tab>", function()
-  if require("luasnip").jumpable(1) then
-    require("luasnip").jump(1)
-  else
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes("<Tab>", true, false, true),
-      "n", false
-    )
-  end
-end, {silent = true})

@@ -220,7 +220,7 @@ return {
       )),
 
       s('myfig', fmta(
-        '\\myfig{0.5}{<>_figures/<>.png}{<>}{fig:<>}',
+        '\\myfig{0.5}{<>_figures/<>}{<>}{fig:<>}',
         { f(function() return vim.fn.expand("%:t:r") end, {}), i(1), i(2), i(3) }
       )),
 
