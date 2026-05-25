@@ -125,6 +125,17 @@ return {
         { i(1) }
       )),
 
+      s('pyc', fmta(
+        [[
+        \begin{pyconsole}
+
+          <>
+        
+        \end{pyconsole}
+        ]],
+        { i(1) }
+      )),
+
       s('todo', fmta(
         '% TODO: ',
         { }
