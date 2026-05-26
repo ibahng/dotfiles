@@ -31,6 +31,14 @@ return {
     vim.g['vimtex_fold_levelmarker'] = '>'
     vim.g['vimtex_indent_enabled'] = 1
 
+    vim.g.vimtex_syntax_custom_envs = {
+      {
+        name = 'pyconsole',
+        region = 'texPythonCodeZone',
+        nested = 'python',
+      }
+    }
+
     vim.g.vimtex_quickfix_ignore_filters = {
       "Overfull",
       "Underfull",

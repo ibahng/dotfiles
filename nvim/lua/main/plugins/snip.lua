@@ -96,6 +96,11 @@ return {
         { i(1) }
       )),
 
+      s('pcon', fmta(
+        '\\pcon{<>}{code:}',
+        { i(1) }
+      )),
+
       s('bce', fmta(
         '\\hspace{7mm}\\ce{<>}',
         { i(1) }
