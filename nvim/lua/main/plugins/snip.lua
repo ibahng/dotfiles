@@ -137,6 +137,7 @@ return {
           <>
         
         \end{pyconsole}
+        \pcon{}{code:}
         ]],
         { i(1) }
       )),
