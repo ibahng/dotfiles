@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: prun <script.py> [args...]"
+  exit 1
+fi
+
+SCRIPT="$1"
+
+if [ ! -f "$SCRIPT" ]; then
+  echo "Error: $SCRIPT not found"
+  exit 1
+fi
+
+BASENAME="${SCRIPT%.py}"
+OUT_FILE="${BASENAME}_out.txt"
+LOG_FILE="${BASENAME}_log.txt"
+
+touch "$OUT_FILE"
+touch "$LOG_FILE"
+
+uv run "$SCRIPT" "${@:2}" > "$OUT_FILE" 2> "$LOG_FILE"

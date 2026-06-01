@@ -211,6 +211,13 @@ return {
       },
     },
     nesting_rules = {
+      ['python'] = {
+        pattern = '(.+)%.py$',
+        files = {
+          '%1_out.txt',
+          '%1_log.txt',
+        },
+      },
       ['tex'] = {
         pattern = '(.+)%.tex$',
         files = {
@@ -259,6 +266,8 @@ return {
           '*.bcf',
           '*.run.xml',
           '*.synctex(busy)',
+          'uv.lock',
+          'pyproject.toml',
 
         },
         always_show = { -- remains visible even if other settings would normally hide it

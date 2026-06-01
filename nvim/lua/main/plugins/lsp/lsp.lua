@@ -26,6 +26,18 @@ return {
       },
     })
 
+    vim.lsp.config("pyright", {
+      capabilities = capabilities,
+      filetypes = { "python" },
+      settings = {
+        python = {
+          pythonPath = vim.fn.getcwd() .. "/.venv/bin/python",
+          venvPath = vim.fn.getcwd(),
+          venv = ".venv",
+        },
+      },
+    })
+
     vim.lsp.config("*", {
       capabilities = capabilities,
     })
