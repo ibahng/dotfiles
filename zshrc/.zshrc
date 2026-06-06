@@ -20,7 +20,7 @@ alias mydesk='yazi ~/myDesktop'
 alias wall='yazi ~/Pictures/Wallpapers'
 
 # NAVIGATION SHORTCUTS =============================================================================
-for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics; do
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils; do
   unalias $func 2>/dev/null
 done
 
@@ -38,6 +38,7 @@ finflux() { cd ~/Workspaces/.finflux && nvim }
 finforge() { cd ~/Workspaces/finforge && nvim }
 biohelix() { cd ~/Workspaces/biohelix && nvim }
 personal() { cd ~/Workspaces/personal && nvim }
+pyutils() { cd ~/Workspaces/pyutils && nvim }
 academics() { cd ~/Workspaces/career/academics && sc-im academics.sc }
 
 # set history 
