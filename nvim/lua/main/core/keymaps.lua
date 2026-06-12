@@ -112,13 +112,24 @@ vim.keymap.set('n', '<leader>=', insert_section_divider, opts)
 local function insert_section_divider()
   local line = vim.api.nvim_get_current_line()
   local cursor_col = vim.api.nvim_win_get_cursor(0)[2]
-  local total_width = 50
+  local total_width = 75
   local suffix = " " .. string.rep("-", total_width - #line - 1)
   local new_line = line .. suffix
   vim.api.nvim_set_current_line(new_line)
 end
 
 vim.keymap.set('n', '<leader>-', insert_section_divider, opts)
+
+local function insert_section_divider()
+  local line = vim.api.nvim_get_current_line()
+  local cursor_col = vim.api.nvim_win_get_cursor(0)[2]
+  local total_width = 50
+  local suffix = " " .. string.rep(">", total_width - #line - 1)
+  local new_line = line .. suffix
+  vim.api.nvim_set_current_line(new_line)
+end
+
+vim.keymap.set('n', '<leader>.', insert_section_divider, opts)
 
 vim.keymap.set("n", "<leader>np", function()
   local notepad = vim.fn.getcwd() .. "/notepad.txt"
