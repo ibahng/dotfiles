@@ -1,6 +1,7 @@
 -- AERIAL - code outline buffer on the side
 return {
   "stevearc/aerial.nvim",
+  branch = "nvim-0.11",
   opts = {
     -- Priority list of preferred backends for aerial.
     -- This can be a filetype map (see :help aerial-filetype-map)

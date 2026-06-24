@@ -10,6 +10,7 @@ $HOME/bin/scripts/utils:\
 $HOME/bin/scripts/reports:\
 $HOME/bin/scripts/biohelix:\
 $HOME/.local/bin:\
+$HOME/.local/share/bob/nvim-bin:\
 $PATH"
 
 # ALIASES ==========================================================================================

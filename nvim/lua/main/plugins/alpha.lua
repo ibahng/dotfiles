@@ -5,7 +5,7 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
-    -- Set header
+
     dashboard.section.header.val = {
       "                                                                  ",
       "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗              ",
@@ -17,7 +17,7 @@ return {
       "                                                                  ",
     }
 
-    -- Set menu
+
     dashboard.section.buttons.val = {
       dashboard.button("SPC e", "  > Toggle Neotree", "<cmd>Neotree toggle<CR>"),
       dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
@@ -50,4 +50,4 @@ return {
     vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
   end,
 }
-                                                                              
+

@@ -269,6 +269,48 @@ return {
         { i(1) }
       )),
 
+      s('rfig', fmta(
+        [[
+        \reactionfig{
+          \scheme{
+            <>
+          }
+        }{caption}{fig:}{0.9}
+        ]],
+        { i(1) }
+      )),
+
+      s('drfig', fmta(
+        [[
+        \doublereactionfig{
+          \scheme{
+            <>
+          }
+        }{
+          \scheme{
+          }
+        }{caption}{fig:}{0.9}
+        ]],
+        { i(1) }
+      )),
+
+      s('trfig', fmta(
+        [[
+        \triplereactionfig{
+          \scheme{
+            <>
+          }
+        }{
+          \scheme{
+          }
+        }{
+          \scheme{
+          }
+        }{caption}{fig:}{0.9}
+        ]],
+        { i(1) }
+      )),
+
     })
 
     ls.add_snippets('python', {
