@@ -121,6 +121,11 @@ return {
         { }
       )),
 
+      s('pka', fmta(
+        'pK$_\\text{a}$',
+        { }
+      )),
+
       s('core', fmta(
         [[
         \begin{core}{<>}
