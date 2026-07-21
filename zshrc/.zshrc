@@ -21,13 +21,15 @@ alias mydesk='yazi ~/myDesktop'
 alias wall='yazi ~/Pictures/Wallpapers'
 
 # NAVIGATION SHORTCUTS =============================================================================
-for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils; do
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils igtutor imtutor; do
   unalias $func 2>/dev/null
 done
 
 career() {cd ~/Workspaces/career && nvim }
 notepad() { cd ~/Workspaces && nvim notepad.txt }
 tutor() { cd ~/Workspaces/tutor && nvim }
+imtutor() { cd ~/Workspaces/im_tutor && nvim }
+igtutor() { cd ~/Workspaces/im_tutor && nvim }
 models() { cd ~/Workspaces/models && nvim }
 reports() { cd ~/Workspaces/reports && nvim }
 sandbox() { cd ~/Workspaces/sandbox && nvim }

@@ -141,3 +141,75 @@ vim.keymap.set("n", "<leader>np", function()
   end
 end, { desc = "Open notepad.txt in current directory" })
 
+local function wrap_raisebox()
+  local keys = vim.api.nvim_replace_termcodes('q', true, false, true)
+  vim.api.nvim_feedkeys(keys, 'x', false)
+
+  local start_line = vim.fn.line("'<")
+  local end_line   = vim.fn.line("'>")
+
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  -- detect existing indentation from the first selected line
+  local base_indent = lines[1]:match("^%s*") or ""
+
+  -- indent each selected line by 2 extra spaces (on top of base_indent)
+  local indented = {}
+  for _, l in ipairs(lines) do
+    -- strip the base_indent first so we don't double it, then re-add + 2 spaces
+    local stripped = l:sub(#base_indent + 1)
+    table.insert(indented, base_indent .. "  " .. stripped)
+  end
+
+  local wrapped = {}
+  table.insert(wrapped, base_indent .. "\\raisebox{}{")
+  for _, l in ipairs(indented) do
+    table.insert(wrapped, l)
+  end
+  table.insert(wrapped, base_indent .. "}")
+
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, wrapped)
+
+  vim.api.nvim_win_set_cursor(0, { start_line, #(base_indent .. "\\raisebox{") })
+  vim.cmd('startinsert')
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    vim.keymap.set('v', '<leader>rb', wrap_raisebox, { buffer = true, desc = "Wrap selection in \\raisebox{}{}" })
+  end,
+})
+
+local function wrap_chemname()
+  local keys = vim.api.nvim_replace_termcodes('q', true, false, true)
+  vim.api.nvim_feedkeys(keys, 'x', false)
+  local start_line = vim.fn.line("'<")
+  local end_line   = vim.fn.line("'>")
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+  -- detect existing indentation from the first selected line
+  local base_indent = lines[1]:match("^%s*") or ""
+  -- indent each selected line by 2 extra spaces (on top of base_indent)
+  local indented = {}
+  for _, l in ipairs(lines) do
+    -- strip the base_indent first so we don't double it, then re-add + 2 spaces
+    local stripped = l:sub(#base_indent + 1)
+    table.insert(indented, base_indent .. "  " .. stripped)
+  end
+  local wrapped = {}
+  table.insert(wrapped, base_indent .. "\\chemname{")
+  for _, l in ipairs(indented) do
+    table.insert(wrapped, l)
+  end
+  table.insert(wrapped, base_indent .. "}{}")
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, wrapped)
+  local last_line = start_line + #wrapped - 1
+  vim.api.nvim_win_set_cursor(0, { last_line, #(base_indent .. "}{") })
+  vim.cmd('startinsert')
+end
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    vim.keymap.set('v', '<leader>cn', wrap_chemname, { buffer = true, desc = "Wrap selection in \\chemname{}{}" })
+  end,
+})

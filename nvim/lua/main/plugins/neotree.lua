@@ -201,10 +201,24 @@ return {
         ["O"] = function(state)
           local node = state.tree:get_node()
           local path = node:get_id()
-          if path:match('%.pdf$') then
-            vim.fn.jobstart({'open', '-a', 'Skim', path}, {detach = true})
+          local extension = vim.fn.fnamemodify(path, ":e"):lower()
+
+          local image_extensions = {
+            png = true,
+            jpg = true,
+            jpeg = true,
+            gif = true,
+            webp = true,
+            tif = true,
+            tiff = true,
+            bmp = true,
+            heic = true,
+          }
+
+          if extension == "pdf" or image_extensions[extension] then
+            local app = extension == "pdf" and "Skim" or "Preview"
+            vim.fn.jobstart({ "open", "-a", app, path }, { detach = true })
           else
-            -- Fallback: open normally
             require("neo-tree.canvas").dispatch("open", state)
           end
         end,

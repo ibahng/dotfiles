@@ -61,6 +61,11 @@ return {
         { i(1) }
       )),
 
+      s('pr', fmta(
+        '\\probref{<>}',
+        { i(1) }
+      )),
+
       s('tb', fmta(
         '\\textbf{<>}',
         { i(1) }
@@ -162,6 +167,11 @@ return {
         { }
       )),
 
+      s('cfdebug', fmta(
+          '\\setchemfig{scheme debug=true}',
+        { }
+      )),
+
       s('alpha', fmta('α', { })),
       s('beta', fmta('β', { })),
       s('gamma', fmta('γ', { })),
@@ -250,6 +260,16 @@ return {
         [[
         \pgfig{
           <>
+        }{<>}{fig:<>}{<>}
+        ]],
+        { i(1), i(2), i(3), i(4) }
+      )),
+
+      s('dpgfig', fmta(
+        [[
+        \doublepgfig{
+          <>
+        }{
         }{<>}{fig:<>}{<>}
         ]],
         { i(1), i(2), i(3), i(4) }
