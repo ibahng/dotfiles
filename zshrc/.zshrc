@@ -29,7 +29,7 @@ career() {cd ~/Workspaces/career && nvim }
 notepad() { cd ~/Workspaces && nvim notepad.txt }
 tutor() { cd ~/Workspaces/tutor && nvim }
 imtutor() { cd ~/Workspaces/im_tutor && nvim }
-igtutor() { cd ~/Workspaces/im_tutor && nvim }
+igtutor() { cd ~/Workspaces/ig_tutor && nvim }
 models() { cd ~/Workspaces/models && nvim }
 reports() { cd ~/Workspaces/reports && nvim }
 sandbox() { cd ~/Workspaces/sandbox && nvim }
