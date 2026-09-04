@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CONTENT="First, please read \`me.md\`. Then review the \`vault-map.md\` and \`skill-map.md\` for relevant context. Confirm you've read. Then await instruction."
+
+printf '%s' "$CONTENT" | pbcopy
+echo "Copied prompt to clipboard."

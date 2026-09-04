@@ -94,10 +94,11 @@ wk.add({
   { "<leader>mo", "<Plug>(VM-Toggle-Mappings)", desc = "Toggle Mappings", remap = false, mode = { "n" } },
 })
 
--- CUSTOM SNIPPETS
+-- CUSTOM SNIPPETS =================================================================================
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)                    -- moves lines in visual mode
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 
+-- SECTION DIVIDERS =================================================================================
 local function insert_section_divider()
   local line = vim.api.nvim_get_current_line()
   local cursor_col = vim.api.nvim_win_get_cursor(0)[2]
@@ -131,6 +132,8 @@ end
 
 vim.keymap.set('n', '<leader>.', insert_section_divider, opts)
 
+
+-- NOTEPAD =========================================================================================
 vim.keymap.set("n", "<leader>np", function()
   local notepad = vim.fn.getcwd() .. "/notepad.txt"
   if vim.fn.filereadable(notepad) == 1 then
@@ -141,6 +144,7 @@ vim.keymap.set("n", "<leader>np", function()
   end
 end, { desc = "Open notepad.txt in current directory" })
 
+-- WRAP RAISEBOX FUNCTION ==========================================================================
 local function wrap_raisebox()
   local keys = vim.api.nvim_replace_termcodes('q', true, false, true)
   vim.api.nvim_feedkeys(keys, 'x', false)
@@ -181,6 +185,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- WRAP CHEMNAME FUNCTION ==========================================================================
 local function wrap_chemname()
   local keys = vim.api.nvim_replace_termcodes('q', true, false, true)
   vim.api.nvim_feedkeys(keys, 'x', false)
@@ -207,9 +212,42 @@ local function wrap_chemname()
   vim.api.nvim_win_set_cursor(0, { last_line, #(base_indent .. "}{") })
   vim.cmd('startinsert')
 end
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
     vim.keymap.set('v', '<leader>cn', wrap_chemname, { buffer = true, desc = "Wrap selection in \\chemname{}{}" })
+  end,
+})
+
+-- INSERT EMPTY LINES ==============================================================================
+local function insert_blank_lines()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+
+  if start_line >= end_line then
+    return -- need at least 2 lines to insert "between"
+  end
+
+  -- Grab the selected lines (0-indexed, end-exclusive for get_lines)
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  -- Build a new table with a blank line inserted between each pair
+  local new_lines = {}
+  for idx, line in ipairs(lines) do
+    table.insert(new_lines, line)
+    if idx < #lines then
+      table.insert(new_lines, '')
+    end
+  end
+
+  -- Replace the original range in one shot
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, new_lines)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    vim.keymap.set('x', '<leader>el', insert_blank_lines, { buffer = true, desc = "Insert blank line between each selected line" })
   end,
 })

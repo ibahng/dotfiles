@@ -21,7 +21,7 @@ alias mydesk='yazi ~/myDesktop'
 alias wall='yazi ~/Pictures/Wallpapers'
 
 # NAVIGATION SHORTCUTS =============================================================================
-for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils igtutor imtutor; do
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils igtutor imtutor obsidian; do
   unalias $func 2>/dev/null
 done
 
@@ -43,6 +43,7 @@ biohelix() { cd ~/Workspaces/biohelix && nvim }
 personal() { cd ~/Workspaces/personal && nvim }
 pyutils() { cd ~/Workspaces/pyutils && nvim }
 academics() { cd ~/Workspaces/career/academics && sc-im academics.sc }
+obsidian() { cd ~/Workspaces/obsidian && nvim }
 
 # set history 
 HISTFILE=~/.zsh_history

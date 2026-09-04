@@ -14,7 +14,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.ignorecase = true                       -- ignore case in search patterns
 vim.opt.cursorline = true                       -- highlight the current line
-vim.opt.number = true                           -- set numbered lines
 vim.opt.numberwidth = 4                         -- set number column width to 4 {default 4}
 vim.opt.scrolloff = 20                          -- keep 8 lines above/below cursor
 vim.opt.sidescrolloff = 12                      -- keep 8 columns left/right of cursor

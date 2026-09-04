@@ -36,6 +36,10 @@ hs.hotkey.bind({"alt"}, "N", function()
   hs.application.launchOrFocus("Notes")
 end)
 
+hs.hotkey.bind({"alt"}, "O", function()
+  hs.application.launchOrFocus("Obsidian")
+end)
+
 hs.hotkey.bind({"alt"}, "\\", function()
   hs.application.launchOrFocus("kitty")
 end)
