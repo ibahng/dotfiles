@@ -57,7 +57,7 @@ wk.add({
   -- PEEK MARKDOWN =================================================================================
   { "<leader>p", group = "Peek Markdown", remap = false },
   { "<leader>po", "<cmd>PeekOpen<cr>", desc = "Open Preview", remap = false },
-  { "<leader>pq", "<cmd>PeekClose<cr>", desc = "Close Preview", remap = false },
+  { "<leader>pc", "<cmd>PeekClose<cr>", desc = "Close Preview", remap = false },
 
   -- IRON REPL (functional keymaps defined in iron.lua, descriptions for which-key below) ==========
   { "<leader>i", group = "IronREPL", remap = false },

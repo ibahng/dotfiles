@@ -21,29 +21,30 @@ alias mydesk='yazi ~/myDesktop'
 alias wall='yazi ~/Pictures/Wallpapers'
 
 # NAVIGATION SHORTCUTS =============================================================================
-for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix personal academics pyutils igtutor imtutor vault; do
+for func in career notepad tutor models reports sandbox research vsreports ibahng dotfiles finflux finforge biohelix academics vault; do
   unalias $func 2>/dev/null
 done
 
-career() {cd ~/Workspaces/career && nvim }
-notepad() { cd ~/Workspaces && nvim notepad.txt }
-tutor() { cd ~/Workspaces/tutor && nvim }
-imtutor() { cd ~/Workspaces/im_tutor && nvim }
-igtutor() { cd ~/Workspaces/ig_tutor && nvim }
-models() { cd ~/Workspaces/models && nvim }
-reports() { cd ~/Workspaces/reports && nvim }
-sandbox() { cd ~/Workspaces/sandbox && nvim }
-research() { cd ~/Research && nvim }
-vsreports() { cd ~/Workspaces/reports && code }
 ibahng() { cd ~/ibahng-com && nvim }
 dotfiles() { cd ~/dotfiles && nvim }
+vault() { cd ~/Workspaces/vault && nvim }
+tutor() { cd ~/Workspaces/tutor && nvim }
+sandbox() { cd ~/Workspaces/sandbox && nvim }
+academics() { cd ~/Workspaces/career/academics && sc-im academics.sc }
+notepad() { cd ~/Workspaces && nvim notepad.txt }
+
+reports() { cd ~/Workspaces/reports && nvim }
+vsreports() { cd ~/Workspaces/reports && code }
+
+career() {cd ~/Workspaces/career && nvim }
+
+research() { cd ~/Research && nvim }
+
 finflux() { cd ~/Workspaces/.finflux && nvim }
 finforge() { cd ~/Workspaces/finforge && nvim }
 biohelix() { cd ~/Workspaces/biohelix && nvim }
-personal() { cd ~/Workspaces/personal && nvim }
-pyutils() { cd ~/Workspaces/pyutils && nvim }
-academics() { cd ~/Workspaces/career/academics && sc-im academics.sc }
-vault() { cd ~/Workspaces/obsidian && nvim }
+models() { cd ~/Workspaces/models && nvim }
+
 
 # set history 
 HISTFILE=~/.zsh_history
@@ -158,3 +159,7 @@ source /Users/ingyubahng/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f $HOME/dotfiles/zshrc/.zshrc_secrets ] && source ~/dotfiles/zshrc/.zshrc_secrets
 
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/ingyubahng/.local/bin:$PATH"

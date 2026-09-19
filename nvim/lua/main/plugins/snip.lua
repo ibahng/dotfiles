@@ -66,6 +66,11 @@ return {
         { i(1) }
       )),
 
+      s('ab', fmta(
+        '\\ansblank{<>}',
+        { i(1) }
+      )),
+
       s('tb', fmta(
         '\\textbf{<>}',
         { i(1) }
@@ -136,6 +141,15 @@ return {
         \begin{core}{<>}
         
         \end{core}
+        ]],
+        { i(1) }
+      )),
+
+      s('gcore', fmta(
+        [[
+        \begin{guidedcore}{<>}
+        
+        \end{guidedcore}
         ]],
         { i(1) }
       )),

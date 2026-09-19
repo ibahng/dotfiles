@@ -7,6 +7,10 @@ set xlsx_readformulas
 nmap "[" "gT"
 nmap "]" "gt"
 
+nmap "i" "e"
+
+nmap "I" "E"
+
 nnoremap "(" "fh"
 nnoremap ")" "fl"
 
