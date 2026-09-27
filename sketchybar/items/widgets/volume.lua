@@ -83,7 +83,9 @@ volume_percent:subscribe("volume_change", function(env)
 
   volume_icon:set({ label = icon })
   volume_percent:set({ label = volume .. "%" })
-  volume_slider:set({ slider = { percentage = volume } })
+  if volume_slider then
+    volume_slider:set({ slider = { percentage = volume } })
+  end
 end)
 
 -- local function volume_collapse_details()

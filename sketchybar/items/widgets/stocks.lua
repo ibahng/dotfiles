@@ -88,7 +88,8 @@ local function get_stock_info(percent_change)
 end
 
 local function load_stocks()
-    local json_encoded = file.read(os.getenv("CONFIG_DIR") .. "/data/stock_data.json")
+    local config_dir = os.getenv("CONFIG_DIR") or (os.getenv("HOME") .. "/.config/sketchybar")
+    local json_encoded = file.read(config_dir .. "/data/stock_data.json")
     local stock_data = lunajson.decode(json_encoded)
 
     local percent_change = stock_data[default_symbol.symbol]

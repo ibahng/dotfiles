@@ -49,7 +49,8 @@ local function load_config()
         }
     }
 
-    local config_filepath = os.getenv("CONFIG_DIR") .. "/config.json"
+    local config_dir = os.getenv("CONFIG_DIR") or (os.getenv("HOME") .. "/.config/sketchybar")
+    local config_filepath = config_dir .. "/config.json"
     local content, error = file.read(config_filepath)
     if not error then
         local json_content = lunajson.decode(content)

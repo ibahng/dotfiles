@@ -72,27 +72,28 @@ sbar.add("item", "widgets.weather.padding", {
 -- end
 
 local function map_condition_to_icon(cond)
+    if not cond then return icons.weather.clear end
     local condition = cond:lower():match("^%s*(.-)%s*$")
-    if condition == "sunny" then
-        return icons.weather.sunny
-    elseif condition == "cloudy" or condition == "overcast" or condition == "haze" then
-        return icons.weather.cloudy
-    elseif condition == "clear" then
-        return icons.weather.clear
-    elseif string.find(condition, "storm") or string.find(condition, "thunder") then
+    if string.find(condition, "storm") or string.find(condition, "thunder") or string.find(condition, "tornado") or string.find(condition, "cyclone") then
         return icons.weather.stormy
-    elseif string.find(condition, "partly") then
-        return icons.weather.partly
-    elseif string.find(condition, "sleet") or string.find(condition, "freez") then
-        return icons.weather.sleet
-    elseif string.find(condition, "rain") or string.find(condition, "drizzle") then
-        return icons.weather.rainy
-    elseif string.find(condition, "snow") or string.find(condition, "ice") then
+    elseif string.find(condition, "snow") or string.find(condition, "ice") or string.find(condition, "blizzard") or string.find(condition, "flurr") then
         return icons.weather.snowy
-    elseif string.find(condition, "mist") or string.find(condition, "fog") then
+    elseif string.find(condition, "sleet") or string.find(condition, "freez") or string.find(condition, "hail") then
+        return icons.weather.sleet
+    elseif string.find(condition, "rain") or string.find(condition, "drizzle") or string.find(condition, "shower") then
+        return icons.weather.rainy
+    elseif string.find(condition, "mist") or string.find(condition, "fog") or string.find(condition, "haze") or string.find(condition, "smoke") or string.find(condition, "smoky") or string.find(condition, "dust") or string.find(condition, "sand") then
         return icons.weather.foggy
+    elseif string.find(condition, "partly") or string.find(condition, "scattered") then
+        return icons.weather.partly
+    elseif string.find(condition, "cloud") or string.find(condition, "overcast") then
+        return icons.weather.cloudy
+    elseif string.find(condition, "sun") then
+        return icons.weather.sunny
+    elseif string.find(condition, "clear") or string.find(condition, "fair") then
+        return icons.weather.clear
     end
-    return "?"
+    return icons.weather.cloudy
 end
 
 local function map_time_to_string(minutes)
@@ -127,37 +128,47 @@ local function load_weather(weather_data)
     local city = nearest_area.areaName[1].value
     local country = nearest_area.country[1].value
     local region = country == "United States of America" and nearest_area.region[1].value or country
-    location_info:set({
-        label = {
-            string = city .. ", " .. region
-        }
-    })
+    if location_info then
+        location_info:set({
+            label = {
+                string = city .. ", " .. region
+            }
+        })
+    end
     local current_time = os.date("*t")
     local time_number = current_time.hour * 100 + current_time.min
-    for day_index, day_item in pairs(weather_data.weather) do
-        local display_date = "Today"
-        if day_index == 2 then
-            display_date = "Tomorrow"
-        elseif day_index == 3 then
-            local two_days_later = os.time() + (2 * 24 * 60 * 60)
-            display_date = tostring(os.date("%A", two_days_later))
-        end
-        popup_days[day_index].day_value:set({ label = { string = display_date }, drawing = true })
-        for hourly_index, hourly_item in ipairs(day_item.hourly) do
-            if day_index == 1 and time_number > tonumber(hourly_item.time) + 300 then
-                popup_days[day_index].hour_values[hourly_index]:set({
-                    drawing = false
-                })
-            else
-                popup_days[day_index].hour_values[hourly_index]:set({
-                    icon = {
-                        string = map_condition_to_icon(hourly_item.weatherDesc[1].value)
-                    },
-                    label = {
-                        string = map_time_to_string(hourly_item.time) .. " | " .. hourly_item.tempC .. "°" .. " | " .. (100 - tonumber(hourly_item.chanceofremdry)) .. "%"
-                    },
-                    drawing = true
-                })
+    if popup_days then
+        for day_index, day_item in pairs(weather_data.weather) do
+            local display_date = "Today"
+            if day_index == 2 then
+                display_date = "Tomorrow"
+            elseif day_index == 3 then
+                local two_days_later = os.time() + (2 * 24 * 60 * 60)
+                display_date = tostring(os.date("%A", two_days_later))
+            end
+            if popup_days[day_index] and popup_days[day_index].day_value then
+                popup_days[day_index].day_value:set({ label = { string = display_date }, drawing = true })
+            end
+            if popup_days[day_index] and popup_days[day_index].hour_values then
+                for hourly_index, hourly_item in ipairs(day_item.hourly) do
+                    if popup_days[day_index].hour_values[hourly_index] then
+                        if day_index == 1 and time_number > tonumber(hourly_item.time) + 300 then
+                            popup_days[day_index].hour_values[hourly_index]:set({
+                                drawing = false
+                            })
+                        else
+                            popup_days[day_index].hour_values[hourly_index]:set({
+                                icon = {
+                                    string = map_condition_to_icon(hourly_item.weatherDesc[1].value)
+                                },
+                                label = {
+                                    string = map_time_to_string(hourly_item.time) .. " | " .. hourly_item.tempC .. "°" .. " | " .. (100 - tonumber(hourly_item.chanceofremdry)) .. "%"
+                                },
+                                drawing = true
+                            })
+                        end
+                    end
+                end
             end
         end
     end

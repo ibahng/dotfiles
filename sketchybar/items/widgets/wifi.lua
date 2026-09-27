@@ -201,23 +201,24 @@ local function hide_details()
 end
 
 local function toggle_details()
+  if not hostname then return end
   local should_draw = wifi_bracket:query().popup.drawing == "off"
   if should_draw then
     wifi_bracket:set({ popup = { drawing = true }})
     sbar.exec("networksetup -getcomputername", function(result)
-      hostname:set({ label = result })
+      if hostname then hostname:set({ label = result }) end
     end)
     sbar.exec("ipconfig getifaddr en0", function(result)
-      ip:set({ label = result })
+      if ip then ip:set({ label = result }) end
     end)
     sbar.exec("ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'", function(result)
-      ssid:set({ label = result })
+      if ssid then ssid:set({ label = result }) end
     end)
     sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Subnet mask: ' '/^Subnet mask: / {print $2}'", function(result)
-      mask:set({ label = result })
+      if mask then mask:set({ label = result }) end
     end)
     sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
-      router:set({ label = result })
+      if router then router:set({ label = result }) end
     end)
   else
     hide_details()

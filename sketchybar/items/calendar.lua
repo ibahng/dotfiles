@@ -31,12 +31,14 @@ local cal_down = sbar.add("item", {
     y_offset = -6
   })
 
--- Double border for calendar using a single item bracket
+-- Bracket for calendar background
 local cal_bracket = sbar.add("bracket", { cal_up.name, cal_down.name }, {
   background = {
-    color = colors.transparent,
+    color = colors.bg1,
+    corner_radius = 0,
+    border_width = 0,
+    border_color = colors.transparent,
     height = 30,
-    border_color = colors.transparent
   },
   update_freq = 1
 })
