@@ -47,6 +47,9 @@ end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
   hs.reload()
 end)
+
+require("casper_hud")
+
 hs.alert.show("Config loaded")
 
 -- -- 1. Configuration
