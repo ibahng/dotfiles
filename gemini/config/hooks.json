@@ -1,0 +1,35 @@
+{
+  "sketchybar-agent-status": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/dotfiles/sketchybar/scripts/antigravity_hook.py pre_tool",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/dotfiles/sketchybar/scripts/antigravity_hook.py post_tool",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ~/dotfiles/sketchybar/scripts/antigravity_hook.py stop",
+        "timeout": 5
+      }
+    ]
+  }
+}

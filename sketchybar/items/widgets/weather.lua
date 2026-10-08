@@ -6,22 +6,39 @@ local tbl = require("utils.tbl")
 
 local weather = sbar.add("item", "widgets.weather", {
     position = "right",
-    icon = { drawing = false },
+    icon = {
+        drawing = false,
+        font = {
+            style = settings.font.style_map["Regular"],
+            size = 18.0,
+        }
+    },
     label = {
         string = icons.loading,
-        font = { family = settings.font.numbers }
+        font = {
+            family = settings.font.numbers,
+            style = settings.font.style_map["Bold"],
+            size = 13.0,
+        }
     },
+    background = { drawing = false },
     update_freq = 900,
-    -- popup = { align = "center", height = 25 }
 })
 
 sbar.add("bracket", "widgets.weather.bracket", { weather.name }, {
-    background = { color = colors.bg1 }
+    background = {
+        color = colors.bg1,
+        corner_radius = 0,
+        border_width = 0,
+        border_color = colors.transparent,
+        height = 30,
+    }
 })
 
 sbar.add("item", "widgets.weather.padding", {
     position = "right",
-    width = settings.group_paddings
+    width = settings.group_paddings,
+    background = { drawing = false }
 })
 
 -- local location_info = sbar.add("item", {

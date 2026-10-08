@@ -46,6 +46,23 @@ local function load_config()
         rss = {
           max_chars = 27,
           update_freq = 1800  -- re-fetch from network every 5 minutes
+        },
+        world_clock = {
+            format = "%H:%M",
+            update_freq = 15,
+            cities = {
+                { tz = "America/Los_Angeles", name = "Los Angeles", enabled = true },
+                { tz = "America/Chicago", name = "Chicago", enabled = true },
+                { tz = "America/New_York", name = "New York", enabled = false },
+                { tz = "Europe/London", name = "London", enabled = false },
+                { tz = "Europe/Paris", name = "Paris", enabled = false },
+                { tz = "Asia/Dubai", name = "Dubai", enabled = false },
+                { tz = "Asia/Singapore", name = "Singapore", abbr = "SGT", enabled = false },
+                { tz = "Asia/Hong_Kong", name = "Hong Kong", enabled = true },
+                { tz = "Asia/Tokyo", name = "Tokyo", enabled = false },
+                { tz = "Asia/Seoul", name = "Seoul", enabled = false },
+                { tz = "Australia/Sydney", name = "Sydney", enabled = false },
+            }
         }
     }
 

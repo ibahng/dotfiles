@@ -137,7 +137,7 @@ return {
             local path = node:get_id()
             local extension = vim.fn.fnamemodify(path, ":e"):lower()
             if extension == "pdf" then
-              vim.fn.jobstart({ "open", "-a", "Skim", path }, { detach = true })
+              vim.fn.jobstart({ "open", "-a", "Preview", path }, { detach = true })
               return
             end
           end
@@ -149,7 +149,7 @@ return {
             local path = node:get_id()
             local extension = vim.fn.fnamemodify(path, ":e"):lower()
             if extension == "pdf" then
-              vim.fn.jobstart({ "open", "-a", "Skim", path }, { detach = true })
+              vim.fn.jobstart({ "open", "-a", "Preview", path }, { detach = true })
               return
             end
           end

@@ -3,10 +3,11 @@ obj.__index = obj
 
 local vaultPath = "/Users/ingyubahng/Workspaces/vault"
 local targetConversationId = "7a752614-2d3f-4606-b9cf-6a24f84b9c73"
-local hudWidth = 680
+local hudWidth = 760
+local notchContentWidth = 680
 local inputHeight = 58
-local responseHeight = 420
-local topOffset = 60
+local responseHeight = 430
+local shadowPadding = 30
 
 local webview = nil
 local usercontent = nil
@@ -17,8 +18,31 @@ local function getHudFrame(height)
     local screen = hs.screen.mainScreen()
     local screenFrame = screen:frame()
     local x = screenFrame.x + (screenFrame.w - hudWidth) / 2
-    local y = screenFrame.y + topOffset
-    return { x = x, y = y, w = hudWidth, h = height }
+    local y = screenFrame.y
+    return { x = x, y = y, w = hudWidth, h = height + shadowPadding }
+end
+
+local function getSessionStats()
+    local dbPath = os.getenv("HOME") .. "/.gemini/antigravity-cli/conversations/" .. targetConversationId .. ".db"
+    local attr = hs.fs.attributes(dbPath)
+    local sizeBytes = attr and attr.size or 0
+    local sizeStr = ""
+    if sizeBytes < 1024 * 1024 then
+        sizeStr = string.format("%.0f KB", sizeBytes / 1024)
+    else
+        sizeStr = string.format("%.1f MB", sizeBytes / (1024 * 1024))
+    end
+    
+    local handle = io.popen("sqlite3 " .. dbPath .. " 'SELECT count(*) FROM steps;' 2>/dev/null")
+    local steps = handle and handle:read("*a")
+    if handle then handle:close() end
+    local stepNum = steps and tonumber(steps:match("%d+"))
+    
+    if stepNum and stepNum > 0 then
+        return string.format("%s • %d turns", sizeStr, stepNum)
+    else
+        return sizeStr
+    end
 end
 
 local function generateHTML()
@@ -44,27 +68,70 @@ local function generateHTML()
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", -system-ui, sans-serif;
         color: #f5f5f7;
         -webkit-font-smoothing: antialiased;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
     }
-    .hud-container {
+    
+    /* Solid 3D Dynamic Apple Notch */
+    .notch-container {
+        width: 680px;
+        height: calc(100% - 30px);
+        position: relative;
+        background: linear-gradient(180deg, #000000 0%, #0d0d12 35%, #181820 80%, #24242e 100%);
+        border-radius: 0 0 20px 20px;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+        box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.12), 0 12px 28px rgba(0, 0, 0, 0.45), 0 4px 10px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+        margin: 0 auto;
+    }
+    
+    /* Top Left Concave Ear */
+    .notch-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -12px;
+        width: 12px;
+        height: 12px;
+        background: transparent;
+        border-top-right-radius: 12px;
+        box-shadow: 4px -4px 0 4px #000000;
+        pointer-events: none;
+    }
+    
+    /* Top Right Concave Ear */
+    .notch-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -12px;
+        width: 12px;
+        height: 12px;
+        background: transparent;
+        border-top-left-radius: 12px;
+        box-shadow: -4px -4px 0 4px #000000;
+        pointer-events: none;
+    }
+
+    .inner-clip {
         width: 100%;
         height: 100%;
-        background: linear-gradient(165deg, rgba(32, 32, 38, 0.96) 0%, rgba(14, 14, 18, 0.98) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-top: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 16px;
-        -webkit-mask-image: -webkit-radial-gradient(white, black);
-        clip-path: inset(0 round 16px);
-        -webkit-clip-path: inset(0 round 16px);
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        border-radius: 0 0 20px 20px;
     }
     
     /* Input View */
     .input-bar {
         display: flex;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 22px;
         height: 58px;
         min-height: 58px;
         cursor: text;
@@ -93,17 +160,18 @@ local function generateHTML()
         border-radius: 6px;
         background: rgba(255, 255, 255, 0.08);
         border: 0.5px solid rgba(255, 255, 255, 0.12);
-        color: rgba(235, 235, 245, 0.6);
+        color: rgba(235, 235, 245, 0.65);
         margin-left: 12px;
         user-select: none;
         -webkit-user-select: none;
+        white-space: nowrap;
     }
 
     /* Loading View */
     .loading-bar {
         display: flex;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 22px;
         height: 55px;
         min-height: 55px;
     }
@@ -119,9 +187,9 @@ local function generateHTML()
         height: 2.5px;
         background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
         background-size: 300% 100%;
-        opacity: 0.85;
+        opacity: 0.9;
         animation: gradientPulse 1.6s infinite linear;
-        border-radius: 0 0 16px 16px;
+        border-radius: 0 0 20px 20px;
     }
     @keyframes gradientPulse {
         0% { background-position: 0% 50%; }
@@ -133,9 +201,9 @@ local function generateHTML()
         display: none;
         flex-direction: column;
         height: 100%;
-        padding: 16px 20px 14px 20px;
+        padding: 16px 22px 14px 22px;
         overflow: hidden;
-        border-radius: 0 0 16px 16px;
+        border-radius: 0 0 20px 20px;
     }
     .response-header {
         display: flex;
@@ -184,7 +252,7 @@ local function generateHTML()
     }
     .response-content li { margin-bottom: 4px; }
     .response-content pre {
-        background: rgba(0, 0, 0, 0.5);
+        background: #111116;
         padding: 10px;
         border-radius: 8px;
         margin: 8px 0;
@@ -211,31 +279,33 @@ local function generateHTML()
 </style>
 </head>
 <body>
-<div class="hud-container" id="hud">
-    <!-- Input Mode -->
-    <div class="input-bar" id="inputView" onclick="document.getElementById('promptInput').focus()">
-        <input type="text" class="input-field" id="promptInput" placeholder="Ask or command CASPER..." autofocus autocomplete="off" spellcheck="false" />
-        <span class="badge">Vault</span>
-    </div>
-
-    <!-- Loading Mode -->
-    <div id="loadingView" style="display: none; flex-direction: column; width: 100%;">
-        <div class="loading-bar">
-            <span class="spinner-text" id="loadingText">Thinking in vault...</span>
-            <span class="badge">Processing</span>
+<div class="notch-container" id="hud">
+    <div class="inner-clip">
+        <!-- Input Mode -->
+        <div class="input-bar" id="inputView" onclick="document.getElementById('promptInput').focus()">
+            <input type="text" class="input-field" id="promptInput" placeholder="Ask or command CASPER..." autofocus autocomplete="off" spellcheck="false" />
+            <span class="badge" id="sessionBadge">Session Loading</span>
         </div>
-        <div class="pulse-bar"></div>
-    </div>
 
-    <!-- Response Mode -->
-    <div class="response-view" id="responseView">
-        <div class="response-header">
-            <span class="response-title">CASPER Response</span>
-            <span class="badge">Session: 7a752614</span>
+        <!-- Loading Mode -->
+        <div id="loadingView" style="display: none; flex-direction: column; width: 100%;">
+            <div class="loading-bar">
+                <span class="spinner-text" id="loadingText">Thinking in vault...</span>
+                <span class="badge">Processing</span>
+            </div>
+            <div class="pulse-bar"></div>
         </div>
-        <div class="response-content" id="responseContent"></div>
-        <div class="response-footer">
-            <span>Esc to dismiss • Enter for new prompt</span>
+
+        <!-- Response Mode -->
+        <div class="response-view" id="responseView">
+            <div class="response-header">
+                <span class="response-title">CASPER Response</span>
+                <span class="badge" id="responseSessionBadge">Session</span>
+            </div>
+            <div class="response-content" id="responseContent"></div>
+            <div class="response-footer">
+                <span>Esc to dismiss • Enter for new prompt</span>
+            </div>
         </div>
     </div>
 </div>
@@ -253,6 +323,14 @@ local function generateHTML()
         if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.casper) {
             window.webkit.messageHandlers.casper.postMessage(data);
         }
+    }
+
+    function updateSessionBadge(data) {
+        const text = (typeof data === 'object' && data.badge) ? data.badge : data;
+        const el1 = document.getElementById('sessionBadge');
+        if (el1) el1.innerText = text;
+        const el2 = document.getElementById('responseSessionBadge');
+        if (el2) el2.innerText = text;
     }
 
     function renderMarkdown(md) {
@@ -371,7 +449,9 @@ function obj.show()
         win:focus()
     end
     
-    webview:evaluateJavaScript("showInputState();")
+    local stats = getSessionStats()
+    local payload = hs.json.encode({ badge = stats })
+    webview:evaluateJavaScript("showInputState(); updateSessionBadge(" .. payload .. ");")
     isVisible = true
 end
 
@@ -421,16 +501,12 @@ function obj.runQuery(promptText)
                 -- Resize frame to expanded response height directly in Lua
                 local frame = getHudFrame(responseHeight)
                 webview:frame(frame)
-                
-                -- Ensure webview is visible and focused
-                webview:show()
-                webview:bringToFront(true)
-                local win = webview:hswindow()
-                if win then win:focus() end
 
-                -- Deliver JSON payload safely to WebKit
+                -- Deliver JSON payload safely to WebKit and update stats without stealing active app/cursor focus
+                local stats = getSessionStats()
                 local payload = hs.json.encode({ text = resultText })
-                webview:evaluateJavaScript("showResponseState(" .. payload .. ");")
+                local badgePayload = hs.json.encode({ badge = stats })
+                webview:evaluateJavaScript("showResponseState(" .. payload .. "); updateSessionBadge(" .. badgePayload .. ");")
             end
         end,
         {

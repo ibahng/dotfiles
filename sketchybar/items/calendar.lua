@@ -1,35 +1,45 @@
 local settings = require("settings")
 local colors = require("colors")
 
--- Padding item required because of bracket
-sbar.add("item", { position = "right", width = settings.group_paddings })
-
-local cal_up = sbar.add("item", {
-    position = "right",
-    padding_left = -5,
-    width = 0,
-    label = {
-      color = colors.white,
-      font = {
-        family = settings.font.numbers,
-        size = 11.0
-      }
-    },
-    y_offset = 6
-  })
+-- Padding item on the far right screen edge
+sbar.add("item", {
+  position = "right",
+  width = settings.group_paddings,
+  background = { drawing = false }
+})
 
 local cal_down = sbar.add("item", {
-    position = "right",
-    padding_left = -5,
-    label = {
-      color = colors.white,
-      font = {
-        family = settings.font.numbers,
-        size = 11.0
-      }
-    },
-    y_offset = -6
-  })
+  position = "right",
+  padding_left = 1,
+  padding_right = 6,
+  width = 0,
+  label = {
+    color = colors.white,
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Bold"],
+      size = 11.0
+    }
+  },
+  y_offset = -6,
+  background = { drawing = false }
+})
+
+local cal_up = sbar.add("item", {
+  position = "right",
+  padding_left = 1,
+  padding_right = 6,
+  label = {
+    color = colors.blue,
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Bold"],
+      size = 11.0
+    }
+  },
+  y_offset = 6,
+  background = { drawing = false }
+})
 
 -- Bracket for calendar background
 local cal_bracket = sbar.add("bracket", { cal_up.name, cal_down.name }, {
@@ -43,23 +53,17 @@ local cal_bracket = sbar.add("bracket", { cal_up.name, cal_down.name }, {
   update_freq = 1
 })
 
--- Padding item required because of bracket
-local spacing = sbar.add("item", { position = "right", width = 26 })
+-- Standardized margin between calendar and weather
+sbar.add("item", {
+  position = "right",
+  width = settings.group_paddings,
+  background = { drawing = false }
+})
 
 cal_bracket:subscribe({ "forced", "routine", "system_woke" }, function(env)
-    local up_value = string.format("%s %d", os.date("%a %b"), tonumber(os.date("%d")))
-    if #up_value < 10 then
-      spacing:set({ width = 18 })
-    end
-    -- local down_value = string.format("%d:%s", tonumber(os.date("%I")), os.date("%M %p"))
-    local down_value = os.date("%H:%M:%S")
-    cal_up:set({ label = { string = up_value } })
-    cal_down:set({ label = { string = down_value } })
-  end)
-
--- local function click_event(env)
---   sbar.exec(settings.calendar.click_script)
--- end
-
--- cal_up:subscribe("mouse.clicked", click_event)
--- cal_down:subscribe("mouse.clicked", click_event)
+  -- Format with fixed 10-character length (%a %b %d) so width never shifts
+  local up_value = os.date("%a %b %d")
+  local down_value = os.date("%H:%M:%S")
+  cal_up:set({ label = { string = up_value } })
+  cal_down:set({ label = { string = down_value } })
+end)

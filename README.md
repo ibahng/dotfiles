@@ -45,6 +45,17 @@ ln -s ~/dotfiles/opencode ~/.config/opencode
 ```
 
 ```zsh
+# sketchybar
+ln -s ~/dotfiles/sketchybar ~/.config/sketchybar
+```
+
+```zsh
+# gemini (antigravity hooks)
+mkdir -p ~/.gemini/config
+ln -s ~/dotfiles/gemini/config/hooks.json ~/.gemini/config/hooks.json
+```
+
+```zsh
 # scripts --- also put script directory paths into $PATH
 chmod +x "script_path"
 ```

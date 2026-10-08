@@ -6,9 +6,11 @@ local widgets = {
     -- "settings",
     -- "clipboard",
     "battery",
-    "volume",
+    -- "volume",
     "wifi",
-    "rss",
+    "world_clock",
+    "agent",
+    -- "rss",
     -- "cpu",
     -- "ram",
     -- "stocks"
